@@ -1,0 +1,41 @@
+[
+
+    {
+        "Subject": "Meidän palaveri",
+        "Organizer": "Miska Hannunkivi",
+        "StartTime": "2020-06-14T09:30:00",
+        "EndTime": "2020-06-14T09:30:00",
+        "Participants": [
+            {
+                "Name": "Miska Hannunkivi",
+                "Title": "Software Developer"
+            },
+            {
+                "Name": "Jussi Vaittinen",
+                "Title": "CEO"
+            },
+            {
+                "Name": "Maka",
+                "Title": "Rooni"
+            }
+        ],
+        "Description": "Liirum sum laarum, ja hommat hoituu"
+    },
+    {
+        "Subject": "Meidän palaveri",
+        "Organizer": "Miska Hannunkivi",
+        "StartTime": "2020-06-14T13:00:00",
+        "EndTime": "2020-06-14T14:30:00",
+        "Participants": null,
+        "Description": "Liirum sum laarum"
+    },
+    {
+        "Subject": "Meidän palaveri",
+        "Organizer": "Miska Hannunkivi",
+        "StartTime": "2020-06-14T17:00:00",
+        "EndTime": "2020-06-14T21:30:00",
+        "Participants": null,
+        "Description": null
+    }
+
+]
