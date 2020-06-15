@@ -1,0 +1,16 @@
+body::-webkit-scrollbar{
+  width: 0.25rem;
+}
+
+body::-webkit-scrollbar-track{
+  background: #fc0;;
+}
+
+body::-webkit-scrollbar-thumb{
+  background: yellow;;
+}
+
+
+app-details-view{
+  width: 0;
+}

@@ -1,0 +1,13 @@
+.center {
+  display: flex;
+  background-color:rgba(0, 0, 0, 0.075);
+  justify-content: center;
+  height: 30vh;
+  top: 0;
+  left: 0;
+}
+
+
+.center h1{
+  align-self: center;
+}

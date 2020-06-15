@@ -1,0 +1,65 @@
+app-calendar-view{
+  right: 0;
+  top: 0;
+  width: var(--navbar-width);
+  height: 100vh;
+}
+
+.navbar{
+  width: var(--navbar-width);
+  height: 100vh;
+  position: fixed;
+  background-color: azure;
+}
+
+app-footer-view{
+  width: 100vw;
+  height: var(--footer-heigh);
+  bottom: 0;
+  left: 0;
+}
+
+app-current-view{
+  height: 70vh;
+  width: var(--current-view-width);
+  top: 0;
+  left: 0;
+}
+
+.current-meeting{
+  height: 70vh;
+  width: var(--current-view-width);
+  top: 0;
+  left: 0;
+  position: fixed;
+}
+
+.footer{
+  width: var(--current-view-width);
+  height: var(--footer-heigh);
+  position: fixed;
+  z-index: -1;
+}
+
+:host{
+  margin-right: 30vw;
+  padding: 1rem;
+  position: fixed;
+}
+
+body{
+  margin: 0;
+  padding: 0;
+}
+
+body::-webkit-scrollbar{
+  width: 0.25rem;
+}
+
+body::-webkit-scrollbar-track{
+  background: #fc0;;
+}
+
+body::-webkit-scrollbar-thumb{
+  background: yellow;;
+}
