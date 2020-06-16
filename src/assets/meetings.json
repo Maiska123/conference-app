@@ -3,8 +3,8 @@
     {
         "Subject": "Meidän palaveri",
         "Organizer": "Miska Hannunkivi",
-        "StartTime": "2020-06-16T14:00:00",
-        "EndTime": "2020-06-16T15:00:00",
+        "StartTime": "2020-06-16T19:00:00",
+        "EndTime": "2020-06-16T20:00:00",
         "Participants": [
             {
                 "Name": "Miska Hannunkivi",
@@ -19,7 +19,7 @@
                 "Title": "Rooni"
             }
         ],
-        "Description": "Liirum sum laarum, ja hommat hoituu"
+        "Description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque dapibus nibh ut aliquet placerat. Donec facilisis facilisis ultrices. Duis id pulvinar ipsum. Vestibulum a ultrices dolor. Quisque ac consequat nisi, eget fringilla ante. Proin et odio a mauris commodo sagittis. Curabitur vestibulum mauris in viverra cursus. Integer non justo diam. Fusce suscipit quam sed risus eleifend rutrum sed a ipsum."
     },
     {
         "Subject": "Meidän palaveri",

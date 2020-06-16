@@ -1,5 +1,5 @@
 
-<div (click)="toggle()" [@openClose]="isOpen ? 'open' : 'closed'" [@flyInOut]="isOpen ? 'open' : 'closed'" class="meetingInProgress" layout="column" layout-align="center center">
+<div [@openClose]="showMeeting ? 'open' : 'closed'" [@flyInOut]="showMeeting ? 'open' : 'closed'" class="meetingInProgress" layout="column" layout-align="center center">
   <div flex="" class="header">
   <p>
       current meeting

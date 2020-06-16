@@ -12,14 +12,18 @@ import { MeetingsService } from '../../services/meetings.service';
 export class DashboardComponent implements OnInit, OnDestroy{
 
 
-  @Output() public meetingSubscription: Subscription;
+  @Output() meeting: Meeting;
 
-  meeting: Meeting[];
+  public meetingSubscription: Subscription;
+
+  allMeetings: Meeting[];
 
   constructor(private meetingsService: MeetingsService) { }
 
   ngOnInit() {
-    this.meetingSubscription = this.meetingsService.getMeetings().subscribe(currentMeeting => this.meeting = currentMeeting);
+    this.meetingSubscription = this.meetingsService.getMeetings().subscribe(currentMeetings => {
+      this.allMeetings = currentMeetings;
+      this.meeting = currentMeetings[0]; });
   }
 
   ngOnDestroy(): void {

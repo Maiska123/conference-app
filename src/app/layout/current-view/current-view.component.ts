@@ -4,6 +4,7 @@ import { Meeting } from '../../interfaces/meeting.interface';
 import { trigger, state, transition, animate, style } from '@angular/animations';
 import { Subscription } from 'rxjs';
 import { ClockService } from '../../services/clock.service';
+import { ShowOnDirtyErrorStateMatcher } from '@angular/material/core';
 
 @Component({
   selector: 'app-current-view',
@@ -55,7 +56,7 @@ export class CurrentViewComponent implements OnInit, OnDestroy {
   public timerWidth;
   public timeLeft = 280;
   public interval;
-  public isOpen = false;
+  public showMeeting = false;
   private clockSubscription: Subscription;
   private meetingSubscription: Subscription;
 
@@ -81,7 +82,7 @@ export class CurrentViewComponent implements OnInit, OnDestroy {
   toggle(): void {
 
     // this.startTimer();
-    (this.isOpen) ?  this.isOpen = false : this.isOpen = true;
+    (this.showMeeting) ?  this.showMeeting = false : this.showMeeting = true;
     this.updateTimeLeft();
   }
 
@@ -91,9 +92,10 @@ export class CurrentViewComponent implements OnInit, OnDestroy {
     const current = new Date(this.time).valueOf();
 
     if (current > start  && current < end){
+      this.showMeeting = true;
       const timePassed = ((1 - (current - start ) / (end - start )) * (280));
       this.timeLeft = 280 - timePassed;
-    } else { this.timeLeft = 280; }
+    } else { this.timeLeft = 280; this.showMeeting = false; }
   }
 
 // startTimer() {

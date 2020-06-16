@@ -1,0 +1,61 @@
+.desc{
+  padding-left: 5vw;
+  padding-right: 5vw;
+  justify-content: space-evenly;
+  text-align: left;
+}
+
+.navigation{
+  top: 0;
+  height: 5rem;
+  color: var(--yellow);
+  background-color: var(--yellow);
+}
+
+.meeting-description{
+  margin-top: 2em;
+}
+
+.row{
+  margin-top: 1em;
+  border-bottom: rgba(219, 219, 219,0.2);
+  border-bottom-style: inset;
+}
+
+.person{
+  padding-left: 3.3vw;
+  padding-right: 5vw;
+  justify-content: space-evenly;
+  text-align: left;
+  grid-template-columns: 2;
+  grid-template-rows: 2;
+}
+
+.avatar{
+  grid-row: 1/2;
+  grid-column: 1;
+}
+
+.home-card-content {
+
+  grid-row: 2;
+  grid-column: 2;
+  display: flex;
+  justify-content: left;
+
+  margin-left: 1em;
+}
+
+.title{
+  grid-row: 1;
+  grid-column: 2;
+}
+
+.subtitle{
+  grid-row: 2;
+  grid-column: 2;
+}
+
+.flex{
+  margin-left: 1em;
+}
