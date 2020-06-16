@@ -1,7 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 
 import { Meeting } from './interfaces/meeting.interface';
 import { MeetingsService } from './services/meetings.service';
+import { MatSidenav } from '@angular/material/sidenav';
+import { SidenavService } from './services/sidenav-details.service';
 
 @Component({
   selector: 'app-root',
@@ -10,7 +12,11 @@ import { MeetingsService } from './services/meetings.service';
 })
 export class AppComponent implements OnInit {
   title = 'conference-app';
-  constructor(private meetingsService: MeetingsService) {}
+
+  @ViewChild('rightSidenav') public sidenav: MatSidenav;
+
+  constructor(private meetingsService: MeetingsService,
+              private sidenavService: SidenavService) {}
   public meetings: Meeting[];
 
   getMeetings(): void {

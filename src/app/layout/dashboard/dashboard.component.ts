@@ -2,6 +2,7 @@ import { Component, OnInit, Output, EventEmitter, OnDestroy } from '@angular/cor
 import { Meeting } from '../../interfaces/meeting.interface';
 import { Subscription } from 'rxjs';
 import { MeetingsService } from '../../services/meetings.service';
+import { SidenavService } from '../../services/sidenav-details.service';
 
 
 @Component({
@@ -18,6 +19,7 @@ export class DashboardComponent implements OnInit, OnDestroy{
 
   allMeetings: Meeting[];
 
+
   constructor(private meetingsService: MeetingsService) { }
 
   ngOnInit() {
@@ -29,4 +31,6 @@ export class DashboardComponent implements OnInit, OnDestroy{
   ngOnDestroy(): void {
     this.meetingSubscription.unsubscribe();
   }
+
+
 }

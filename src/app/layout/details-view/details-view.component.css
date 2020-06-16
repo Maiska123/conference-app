@@ -1,3 +1,8 @@
+.rightSidenav {
+	z-index: 999;
+}
+
+
 .desc{
   padding-left: 5vw;
   padding-right: 5vw;
@@ -34,6 +39,8 @@
 .avatar{
   grid-row: 1/2;
   grid-column: 1;
+  background-image: url('https://material.angular.io/assets/img/examples/shiba1.jpg');
+  background-size: cover;
 }
 
 .home-card-content {

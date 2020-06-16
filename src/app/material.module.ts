@@ -10,6 +10,8 @@ import {  MatCardModule } from '@angular/material/card';
 import {  MatMenuModule } from '@angular/material/menu';
 import {  MatIconModule } from '@angular/material/icon';
 import { MatExpansionModule } from '@angular/material/expansion';
+import { MatSidenavModule } from '@angular/material/sidenav';
+
 
 @NgModule({
   imports: [  MatButtonModule,
@@ -20,7 +22,8 @@ import { MatExpansionModule } from '@angular/material/expansion';
               MatCardModule,
               MatMenuModule,
               MatIconModule,
-              MatExpansionModule],
+              MatExpansionModule,
+              MatSidenavModule],
   exports: [  MatButtonModule,
               MatCheckboxModule,
               MatToolbarModule,
@@ -29,7 +32,8 @@ import { MatExpansionModule } from '@angular/material/expansion';
               MatCardModule,
               MatMenuModule,
               MatIconModule,
-              MatExpansionModule]
+              MatExpansionModule,
+              MatSidenavModule]
 })
 
 

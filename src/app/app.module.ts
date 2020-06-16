@@ -11,6 +11,9 @@ import { CalendarViewComponent } from './layout/calendar-view/calendar-view.comp
 import { FooterViewComponent } from './layout/footer-view/footer-view.component';
 import { CurrentViewComponent } from './layout/current-view/current-view.component';
 import { DetailsViewComponent } from './layout/details-view/details-view.component';
+import { SidenavService } from './services/sidenav-details.service';
+import { MeetingsService } from './services/meetings.service';
+import { ClockService } from './services/clock.service';
 
 
 @NgModule({
@@ -29,7 +32,9 @@ import { DetailsViewComponent } from './layout/details-view/details-view.compone
     MaterialModule,
     BrowserAnimationsModule
   ],
-  providers: [],
+  providers: [SidenavService,
+              ClockService,
+              MeetingsService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

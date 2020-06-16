@@ -1,5 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Meeting } from '../../interfaces/meeting.interface';
+import { SidenavService } from '../../services/sidenav-details.service';
 
 @Component({
   selector: 'app-footer-view',
@@ -10,9 +11,12 @@ export class FooterViewComponent implements OnInit {
 
   @Input() meetingData: Meeting;
 
-  constructor() { }
+  constructor(private sidenavService: SidenavService) { }
 
   ngOnInit() {
   }
 
+  toggleRightSidenav() {
+    this.sidenavService.toggle();
+  }
 }
