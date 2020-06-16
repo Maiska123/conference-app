@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, EventEmitter } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 import { Observable, of } from 'rxjs';
@@ -18,7 +18,7 @@ export class MeetingsService {
   };
 
   constructor(
-    private http: HttpClient) { }
+    private http: HttpClient) {}
 
       /** GET meetings from the "server" */
   getMeetings(): Observable<Meeting[]> {
@@ -27,6 +27,10 @@ export class MeetingsService {
       tap(_ => console.log('fetched meetings')),
       catchError(this.handleError<Meeting[]>('getMeeting', []))
     );
+  }
+
+  getMeeting(){
+    return this.getMeetings();
   }
 
   /**

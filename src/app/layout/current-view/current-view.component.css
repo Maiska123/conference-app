@@ -1,32 +1,56 @@
 .center {
   display: flex;
-  background-color:rgba(0, 0, 0, 0.075);
+  /* background-color:rgba(0, 0, 0, 0.075); */
   justify-content: center;
-  height: 70vh;
-  top: 0;
-  left: 0;
+  /* min-height: 27vh; */
+  /* overflow: hidden; */
+  margin: 0;
 }
 
-/* Thick red border */
-hr.thick {
-  border: 1px solid red;
-}
 
 .center h1{
   align-self: center;
-  font-size: 7em;
+  font-size: 7vw;
   font-weight: bolder;
-  padding: 0.2em;
+  line-height: 0.8em;
+  word-wrap: break-word;
+  position: relative;
+  display: inline-block;
+  /* overflow: hidden; */
+  padding: 0;
+  margin: 0;
+  inline-size: min-content;
+
+  border: 0;
+  outline: 0;
+  transform: translateY(-2vh);
 }
 
 .header{
 font-weight: lighter;
+font-size: 1.6em;
+max-height: 5.7vh;
 }
 
 .meetingInProgress{
 
   font-variant-caps: all-petite-caps;
-  display: grid;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  align-content: center;
+  height: var(--current-view-height);
+  text-align: center;
+  color: aliceblue;
+  transform: translateY(10vh);
+  opacity: 0;
+}
 
+.time{
+  font-size: 3vh;
+}
 
+.organizer{
+  font-size: 2.5vh;
 }

@@ -13,8 +13,8 @@ app-calendar-view{
 }
 
 app-footer-view{
-  width: 100vw;
-  height: var(--footer-heigh);
+  width: var(--current-view-width);
+  height: var(--footer-height);
   bottom: 0;
   left: 0;
 }
@@ -27,7 +27,7 @@ app-current-view{
 }
 
 .current-meeting{
-  height: 70vh;
+  height: var(--current-view-height);
   width: var(--current-view-width);
   top: 0;
   left: 0;
@@ -36,7 +36,7 @@ app-current-view{
 
 .footer{
   width: var(--current-view-width);
-  height: var(--footer-heigh);
+  height: var(--footer-height);
   position: fixed;
   z-index: -1;
 }

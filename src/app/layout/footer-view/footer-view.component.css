@@ -2,7 +2,7 @@
   display: flex;
   background-color:rgba(0, 0, 0, 0.075);
   justify-content: center;
-  height: 30vh;
+  height: var(--footer-height);
   top: 0;
   left: 0;
 }

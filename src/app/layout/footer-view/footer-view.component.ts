@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
+import { Meeting } from '../../interfaces/meeting.interface';
 
 @Component({
   selector: 'app-footer-view',
@@ -6,6 +7,8 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./footer-view.component.css']
 })
 export class FooterViewComponent implements OnInit {
+
+  @Input() meetingData: Meeting;
 
   constructor() { }
 

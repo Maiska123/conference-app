@@ -1,4 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, OnDestroy } from '@angular/core';
+import { Meeting } from '../../interfaces/meeting.interface';
+import { Subscription } from 'rxjs';
+import { MeetingsService } from '../../services/meetings.service';
 
 
 @Component({
@@ -6,11 +9,20 @@ import { Component, OnInit } from '@angular/core';
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.css']
 })
-export class DashboardComponent implements OnInit {
+export class DashboardComponent implements OnInit, OnDestroy{
 
-  constructor() { }
+
+  @Output() public meetingSubscription: Subscription;
+
+  meeting: Meeting[];
+
+  constructor(private meetingsService: MeetingsService) { }
 
   ngOnInit() {
+    this.meetingSubscription = this.meetingsService.getMeetings().subscribe(currentMeeting => this.meeting = currentMeeting);
   }
 
+  ngOnDestroy(): void {
+    this.meetingSubscription.unsubscribe();
+  }
 }
