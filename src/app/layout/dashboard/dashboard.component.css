@@ -9,7 +9,7 @@ app-calendar-view{
   width: var(--navbar-width);
   height: 100vh;
   position: fixed;
-  background-color: azure;
+  background-color: white;
 }
 
 app-footer-view{

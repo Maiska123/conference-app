@@ -14,24 +14,42 @@ import { SidenavService } from '../../services/sidenav-details.service';
     trigger('openClose', [
       // ...
       state('open', style({
-        opacity: 1
-      })),
-      state('closed', style({
         opacity: 0
       })),
+      state('closed', style({
+        opacity: 1
+      })),
       transition('* => closed', [
-        animate('1s ease')
+        animate('0.2s ease')
       ]),
       transition('* => *', [
-        animate('0.5s ease')
+        animate('0.3s ease')
       ]),
     ]),
+    trigger('arrow', [
+      // ...
+      state('open', style({
+        opacity: 0,
+        transform: 'translate(50%, 50%) rotate(90deg)'
+      })),
+      state('closed', style({
+        opacity: 1,
+        transform: 'translate(0%, 0%) rotate(0deg)'
+      })),
+      transition('* => *', [
+        animate('0.3s ease')
+      ]),
+      transition('open => closed', [
+        animate('0.2s ease')
+      ]),
+    ])
   ],
 })
 export class DetailsViewComponent implements OnInit, OnDestroy, AfterViewInit {
 
   // @Input() meetingData: Meeting;
   @Input() meetingData: Meeting;
+  @Input() public toggleActive = false;
 
   @ViewChild('rightSidenav') public sidenav: MatSidenav;
 
@@ -40,7 +58,7 @@ export class DetailsViewComponent implements OnInit, OnDestroy, AfterViewInit {
 
   public meetingDataOld: Meeting;
   public meetingSubscription: Subscription;
-  public toggleActive = false;
+  // public toggleActive = false;
   constructor(
     private meetingsService: MeetingsService,
     private sidenavService: SidenavService

@@ -18,13 +18,13 @@
 }
 
 .meeting-description{
-  margin-top: 2em;
+  /* margin-top: 2em; */
 }
 
 .row{
   margin-top: 1em;
-  border-bottom: rgba(219, 219, 219,0.2);
-  border-bottom-style: inset;
+  /* border-top: rgba(219, 219, 219, 0.089);
+  border-bottom-style: inset; */
 }
 
 .person{

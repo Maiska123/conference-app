@@ -1,12 +1,41 @@
-body::-webkit-scrollbar{
+:host{
+  overflow: auto;
+}
+
+.timetable-container{
+  -webkit-align-items: stretch;
+  align-items: stretch;
+}
+
+body{
+  display: grid;
+}
+
+:host::-webkit-scrollbar{
   width: 0.25rem;
 }
 
-body::-webkit-scrollbar-track{
-  background: #fc0;;
+:host::-webkit-scrollbar-track{
+  background: #fc0;
 }
 
-body::-webkit-scrollbar-thumb{
-  background: yellow;;
+:host::-webkit-scrollbar-thumb{
+  background: yellow;
 }
 
+table {
+  width: 100%;
+}
+
+.timetable{
+  display: grid;
+  overflow-y: hidden;
+  overflow-x: hidden;
+  grid-template-rows: 150px auto 100px;
+  grid-template-columns: 1fr 7fr;
+  width: 100%;
+  display: -webkit-box;
+  display: -webkit-flex;
+  -webkit-align-items: flex-start;
+  align-items: flex-start;
+}

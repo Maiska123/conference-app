@@ -1,3 +1,20 @@
-<!-- Tähän tulee gridi -->
-<h1>Tähän siis pitäs tulla se päivän kulku</h1>
-<app-details-view [meetingData]="meetings[0]"></app-details-view>
+<body>
+
+  <div class="timetable-container">
+    <mat-grid-list cols="1" rowHeight="100px" class="timetable">
+      <mat-grid-tile
+        *ngFor="let tile of timeTiles"
+        [colspan]="tile.cols"
+        [rowspan]="tile.rows"
+        style="border-style: solid;border-color:rgba(214, 214, 214, 0.151)"
+        >{{tile.text}}
+      </mat-grid-tile>
+    </mat-grid-list>
+  </div>
+
+</body>
+
+
+
+
+<app-details-view [toggleActive]="showDetails" [meetingData]="meetings[0]"></app-details-view>

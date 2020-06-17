@@ -11,7 +11,8 @@ import {  MatMenuModule } from '@angular/material/menu';
 import {  MatIconModule } from '@angular/material/icon';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatSidenavModule } from '@angular/material/sidenav';
-
+import { MatTableModule } from '@angular/material/table';
+import { MatGridListModule } from '@angular/material/grid-list';
 
 @NgModule({
   imports: [  MatButtonModule,
@@ -23,7 +24,9 @@ import { MatSidenavModule } from '@angular/material/sidenav';
               MatMenuModule,
               MatIconModule,
               MatExpansionModule,
-              MatSidenavModule],
+              MatSidenavModule,
+              MatTableModule,
+              MatGridListModule],
   exports: [  MatButtonModule,
               MatCheckboxModule,
               MatToolbarModule,
@@ -33,7 +36,9 @@ import { MatSidenavModule } from '@angular/material/sidenav';
               MatMenuModule,
               MatIconModule,
               MatExpansionModule,
-              MatSidenavModule]
+              MatSidenavModule,
+              MatTableModule,
+              MatGridListModule]
 })
 
 

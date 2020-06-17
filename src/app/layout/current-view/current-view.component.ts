@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, OnDestroy } from '@angular/core';
+import { Component, OnInit, Input, OnDestroy, Output, EventEmitter, OnChanges } from '@angular/core';
 import { MeetingsService } from '../../services/meetings.service';
 import { Meeting } from '../../interfaces/meeting.interface';
 import { trigger, state, transition, animate, style } from '@angular/animations';
@@ -22,10 +22,10 @@ import { ShowOnDirtyErrorStateMatcher } from '@angular/material/core';
 
       })),
       transition('* => closed', [
-        animate('1s ease-in')
+        animate('0.5s ease-in')
       ]),
       transition('* => open', [
-        animate('1.5s ease-out')
+        animate('0.5s ease-out')
       ]),
       // transition('open <=> closed', [
       //   animate('0.5s')
@@ -40,62 +40,67 @@ import { ShowOnDirtyErrorStateMatcher } from '@angular/material/core';
         transform: 'translateY(15vh)'
        })),
       transition('* => *', [
-        animate('1.5s ease')
+        animate('0.5s ease')
       ])
     ])
   ],
 })
-export class CurrentViewComponent implements OnInit, OnDestroy {
+export class CurrentViewComponent implements OnInit, OnDestroy, OnChanges {
 
   @Input() meetingData: Meeting;
+  @Input() meetingReload: boolean;
+  @Input() TimeIn: Date;
 
-  public meetingDataIn: Meeting;
+  // tslint:disable-next-line: no-output-rename
+  @Output('update') public nextMeeting: EventEmitter<boolean> = new EventEmitter<boolean>();
 
-  public time: Date;
+  receivedParentMessage: boolean;
+
   public meetings: Meeting[];
   public timerWidth;
   public timeLeft = 280;
   public interval;
-  public showMeeting = false;
+  public showMeeting = true;
   private clockSubscription: Subscription;
   private meetingSubscription: Subscription;
 
-  constructor(private meetingsService: MeetingsService,
-              private clockService: ClockService) {
+  constructor() {
 
   }
 
   ngOnInit(): void {
-    console.log(this.meetingData);
 
-    this.clockSubscription = this.clockService.getTime().subscribe(time => {
-     this.time = time;
-     this.updateTimeLeft(); });
-    this.meetingSubscription = this.meetingsService.getMeetings().subscribe(freshMeetings => this.meetings = freshMeetings);
   }
 
-  ngOnDestroy(): void {
-    this.clockSubscription.unsubscribe();
-    this.meetingSubscription.unsubscribe();
-  }
-
-  toggle(): void {
-
-    // this.startTimer();
-    (this.showMeeting) ?  this.showMeeting = false : this.showMeeting = true;
+  ngOnChanges() {
+    this.showMeeting = this.meetingReload;
     this.updateTimeLeft();
   }
 
+  ngOnDestroy(): void {
+
+  }
+
+  toggle(showMeet: boolean): void {
+
+    (this.showMeeting) ?  this.showMeeting = showMeet : this.showMeeting = showMeet;
+  }
+
   updateTimeLeft(){
-    const end = new Date(this.meetings[0].EndTime).valueOf();
-    const start = new Date(this.meetings[0].StartTime).valueOf();
-    const current = new Date(this.time).valueOf();
+
+    const end = new Date(this.meetingData.EndTime).valueOf();
+    const start = new Date(this.meetingData.StartTime).valueOf();
+    const current = new Date(this.TimeIn).valueOf();
 
     if (current > start  && current < end){
       this.showMeeting = true;
       const timePassed = ((1 - (current - start ) / (end - start )) * (280));
       this.timeLeft = 280 - timePassed;
-    } else { this.timeLeft = 280; this.showMeeting = false; }
+
+    } else { this.timeLeft = 280;
+             this.showMeeting = false;
+             this.nextMeeting.emit(this.showMeeting);
+            }
   }
 
 // startTimer() {

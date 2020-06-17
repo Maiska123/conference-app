@@ -17,7 +17,7 @@
   <div flex="" class="center">
 
     <h1>
-      {{ meetings[0].Subject }}
+      {{ meetingData.Subject }}
     </h1>
 
   </div>
@@ -25,7 +25,7 @@
   <div layout="row" flex="" class="time">
 
     <span>
-      {{ meetings[0].StartTime | date:'HH:mm'}}
+      {{ meetingData.StartTime | date:'HH:mm'}}
     </span>
     <span>
       <svg height="7" style="transform: translateY(-5px);">
@@ -38,14 +38,14 @@
 
     </span>
     <span>
-      {{ meetings[0].EndTime | date:'HH:mm'}}
+      {{ meetingData.EndTime | date:'HH:mm'}}
     </span>
   </div>
 
   <div flex="" class="organizer">
 
     <span>
-      {{ meetings[0].Organizer }}
+      {{ meetingData.Organizer }}
     </span>
 
   </div>

@@ -10,6 +10,7 @@ import { SidenavService } from '../../services/sidenav-details.service';
 export class FooterViewComponent implements OnInit {
 
   @Input() meetingData: Meeting;
+  @Input() TimeIn: Date;
 
   constructor(private sidenavService: SidenavService) { }
 
