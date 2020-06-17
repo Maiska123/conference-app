@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, OnDestroy, ViewChild } from '@angular/core';
+import { Component, OnInit, Input, OnDestroy, ViewChild, OnChanges } from '@angular/core';
 import { Meeting } from '../../interfaces/meeting.interface';
 import { MeetingsService } from '../../services/meetings.service';
 import { ClockService } from '../../services/clock.service';
@@ -33,7 +33,12 @@ import { TimeTile } from '../../interfaces/timeTiles.interface';
     ]),
   ],
 })
-export class CalendarViewComponent implements OnInit, OnDestroy{
+export class CalendarViewComponent implements OnInit, OnDestroy, OnChanges{
+
+
+  constructor(private meetingsService: MeetingsService,
+              private clockService: ClockService,
+              private sidenavService: SidenavService) { }
 
   @Input() meetingData: Meeting;
   @Input() TimeIn: Date;
@@ -44,8 +49,21 @@ export class CalendarViewComponent implements OnInit, OnDestroy{
   public meetingSubscription: Subscription;
   public showDetails = false;
 
+
   displayedColumns: string[] = ['subject', 'organizer', 'weight', 'symbol'];
 
+  stylesObj = {
+    'font-size': '1.1em',
+    color: 'black',
+    'font-family': 'Lato',
+    padding: 0,
+    'margin-top': '200px',
+    top: '3vh',
+    'max-width': '100%'
+  };
+
+
+  // 1 hour is 100px height => 1min = 1.66px, 1s = 0.0277px ^
   timeTiles: TimeTile[] = [
     {text: '00:00', cols: 1, rows: 1},
     {text: '01:00', cols: 1, rows: 1},
@@ -74,14 +92,21 @@ export class CalendarViewComponent implements OnInit, OnDestroy{
     {text: '23:00', cols: 1, rows: 1},
   ];
 
-
-  constructor(private meetingsService: MeetingsService,
-              private clockService: ClockService,
-              private sidenavService: SidenavService) { }
-
   ngOnInit() {
-    this.clockSubscription = this.clockService.getTime().subscribe(time => this.time = time);
-    this.meetingSubscription = this.meetingsService.getMeetings().subscribe(freshMeetings => this.meetings = freshMeetings);
+
+    this.clockSubscription = this.clockService.getTime()
+    .subscribe(time => {
+      this.time = time;
+    });
+
+    this.meetingSubscription = this.meetingsService.getMeetings()
+    .subscribe(freshMeetings => {
+      this.meetings = freshMeetings;
+    });
+  }
+
+  ngOnChanges() {
+
   }
 
   ngOnDestroy(): void {
@@ -92,5 +117,6 @@ export class CalendarViewComponent implements OnInit, OnDestroy{
   toggleRightSidenav() {
     this.sidenavService.toggle();
   }
+
 
 }

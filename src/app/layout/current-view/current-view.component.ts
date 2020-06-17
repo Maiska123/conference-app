@@ -53,6 +53,7 @@ export class CurrentViewComponent implements OnInit, OnDestroy, OnChanges {
 
   // tslint:disable-next-line: no-output-rename
   @Output('update') public nextMeeting: EventEmitter<boolean> = new EventEmitter<boolean>();
+  // without true to event emitter 'ExpressionChangedAfterItHasBeenCheckedError' happens, with true looks ugly.
 
   receivedParentMessage: boolean;
 

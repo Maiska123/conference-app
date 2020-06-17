@@ -1,16 +1,51 @@
 <body>
 
+
+
   <div class="timetable-container">
+
+  <div class="roomdata">
+
+    <h3>ROOM NAME</h3>
+    <h2>KESÄ TODAY</h2>
+
+  </div>
+       <div class="background-block"></div>
+
     <mat-grid-list cols="1" rowHeight="100px" class="timetable">
       <mat-grid-tile
         *ngFor="let tile of timeTiles"
         [colspan]="tile.cols"
         [rowspan]="tile.rows"
-        style="border-style: solid;border-color:rgba(214, 214, 214, 0.151)"
-        >{{tile.text}}
+        style="border-style: solid;border-color:rgba(214, 214, 214, 0.151);overflow: visible;">
+        <div class="clockan"> {{tile.text}} </div>
       </mat-grid-tile>
     </mat-grid-list>
+
+  <ng-container *ngFor="let meeting of meetings">
+
+    <!-- <table>
+      <th></th>
+      <tr>      </tr>
+    </table> -->
+
+        <mat-card class="meeting-card" [ngStyle]="stylesObj">
+          <mat-card-title>
+            {{  meeting.Subject }}
+          </mat-card-title>
+          <mat-card-subtitle>
+            Meeting
+          </mat-card-subtitle>
+          <mat-card-content>
+            {{  meeting.Organizer }}
+          </mat-card-content>
+        </mat-card>
+
+  </ng-container>
+
   </div>
+
+
 
 </body>
 

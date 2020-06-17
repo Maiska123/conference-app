@@ -2,13 +2,41 @@
   overflow: auto;
 }
 
+app-details-view{
+  z-index: 10;
+}
+
+.roomdata{
+  z-index: 1;
+  box-sizing: border-box;
+  background-color: white;
+  padding-bottom: 2vh;
+  position: fixed;
+  top: 0;
+  right: 19vw;
+  height: 12vh;
+  box-shadow: 0 0 30px 20px white;
+  overflow: hidden;
+}
+
+.background-block{
+  width: 100%;
+  height: 9vh;
+  position: fixed;
+  top: 0;
+  z-index: 0;
+  background-color: white;
+}
+
 .timetable-container{
   -webkit-align-items: stretch;
   align-items: stretch;
+  margin-top: 12vh;
 }
 
 body{
   display: grid;
+  margin: 0;
 }
 
 :host::-webkit-scrollbar{
@@ -28,6 +56,7 @@ table {
 }
 
 .timetable{
+  z-index: -1;
   display: grid;
   overflow-y: hidden;
   overflow-x: hidden;
@@ -38,4 +67,19 @@ table {
   display: -webkit-flex;
   -webkit-align-items: flex-start;
   align-items: flex-start;
+
+}
+
+.clockan{
+  position: relative;
+  right: 15.5vw;
+  bottom: 3.1em;
+  padding: 1em;
+  background-color: white;
+  padding-left: 3em;
+}
+
+.meeting-card{
+  position: absolute;
+  left: 5vw;
 }
