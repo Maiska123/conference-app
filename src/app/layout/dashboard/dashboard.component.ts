@@ -18,6 +18,7 @@ export class DashboardComponent implements OnInit, OnDestroy{
   meetingReload: boolean;
   timeOut: Date;
 
+  currentMeeting: number;
   receivedChildMessage: boolean;
 
   private clockSubscription: Subscription;
@@ -31,7 +32,8 @@ export class DashboardComponent implements OnInit, OnDestroy{
 
   ngOnInit() {
     this.meetingSubscription = this.meetingsService.getMeetings().subscribe(currentMeetings => {
-      this.allMeetings = currentMeetings;
+      this.allMeetings = currentMeetings.reverse();
+      this.currentMeeting = currentMeetings.length;
       this.meeting = currentMeetings[0];
     });
 
@@ -45,6 +47,7 @@ export class DashboardComponent implements OnInit, OnDestroy{
   }
 
   nextMeeting(event: boolean) {
+
     this.receivedChildMessage = event;
     this.meetingInProgress = event;
 
@@ -53,7 +56,12 @@ export class DashboardComponent implements OnInit, OnDestroy{
       this.meetingReload = this.receivedChildMessage;
 
     } else { this.meetingReload = event;
-             this.meeting = this.allMeetings[1];
+             this.currentMeeting = --this.currentMeeting;
+             console.log(this.currentMeeting);
+             this.meeting = this.allMeetings[this.currentMeeting];
+
+             this.allMeetings.pop();
+
             }
   }
 

@@ -56,10 +56,17 @@ export class CalendarViewComponent implements OnInit, OnDestroy, OnChanges{
     'font-size': '1.1em',
     color: 'black',
     'font-family': 'Lato',
-    padding: 0,
     'margin-top': '200px',
     top: '3vh',
-    'max-width': '100%'
+    'max-width': '70%',
+    width: '-webkit-fill-available',
+    'border-left-width': '1vw',
+    'border-left-color': 'yellow',
+    'border-left-style': 'solid',
+    'box-shadow': '3px 6px 20px 0px rgba(0,0,0,0.2)',
+    'background-color': 'white',
+    left: '2.3vw',
+    padding: '1vw',
   };
 
 

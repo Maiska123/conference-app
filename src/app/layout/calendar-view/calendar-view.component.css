@@ -32,6 +32,7 @@ app-details-view{
   -webkit-align-items: stretch;
   align-items: stretch;
   margin-top: 12vh;
+  position: relative;
 }
 
 body{
@@ -56,6 +57,7 @@ table {
 }
 
 .timetable{
+  position: absolute;
   z-index: -1;
   display: grid;
   overflow-y: hidden;
@@ -72,14 +74,15 @@ table {
 
 .clockan{
   position: relative;
-  right: 15.5vw;
+  right: 14.5vw;
   bottom: 3.1em;
   padding: 1em;
   background-color: white;
   padding-left: 3em;
+  font-weight: 800;
 }
 
 .meeting-card{
   position: absolute;
-  left: 5vw;
+  left: 8vw;
 }

@@ -4,12 +4,12 @@
 
   <div class="timetable-container">
 
-  <div class="roomdata">
+    <div class="roomdata">
 
-    <h3>ROOM NAME</h3>
-    <h2>KESÄ TODAY</h2>
+      <h3>ROOM NAME</h3>
+      <h2>KESÄ TODAY</h2>
 
-  </div>
+    </div>
        <div class="background-block"></div>
 
     <mat-grid-list cols="1" rowHeight="100px" class="timetable">
@@ -22,27 +22,28 @@
       </mat-grid-tile>
     </mat-grid-list>
 
-  <ng-container *ngFor="let meeting of meetings">
+    <mat-grid-list cols="1" rows="24" rowHeight="100px" style="position: inherit;top:0;">
+      <mat-grid-tile *ngFor="let meeting of meetings"  style="position: relative; overflow:  visible">
 
-    <!-- <table>
-      <th></th>
-      <tr>      </tr>
-    </table> -->
+        <!-- <table>
+          <th></th>
+          <tr>      </tr>
+        </table> -->
 
-        <mat-card class="meeting-card" [ngStyle]="stylesObj">
-          <mat-card-title>
-            {{  meeting.Subject }}
-          </mat-card-title>
-          <mat-card-subtitle>
-            Meeting
-          </mat-card-subtitle>
-          <mat-card-content>
-            {{  meeting.Organizer }}
-          </mat-card-content>
-        </mat-card>
+            <mat-card [ngStyle]="stylesObj"> <!-- class="meeting-card"  -->
+              <mat-card-title style="font-weight: 900;font-size:larger;font-kerning:none">
+                {{  meeting.Subject }}
+              </mat-card-title>
+              <mat-card-subtitle>
+                {{  meeting.Organizer | uppercase}}
+              </mat-card-subtitle>
+              <mat-card-content>
+                Meeting blaa blaa
+              </mat-card-content>
+            </mat-card>
 
-  </ng-container>
-
+      </mat-grid-tile >
+    </mat-grid-list>
   </div>
 
 

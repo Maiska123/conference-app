@@ -4,6 +4,6 @@
 
   <app-calendar-view class="navbar" [meetingData]="meeting" [TimeIn]="timeOut" ></app-calendar-view>
 
-  <app-footer-view class="footer" [meetingData]="meeting" [TimeIn]="timeOut"></app-footer-view>
+  <app-footer-view class="footer" [showMeeting]="meetingReload" [meetingData]="allMeetings" [TimeIn]="timeOut"></app-footer-view>
 
 </body>

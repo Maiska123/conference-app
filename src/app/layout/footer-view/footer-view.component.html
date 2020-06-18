@@ -1,7 +1,24 @@
 
-<div class="center" (click)="toggleRightSidenav()">
-  <h1 style="color: aliceblue;">
-    yay it works for footer
+<div style="position:relative;width: 100%;height:inherit">
 
-  </h1>
+  <div class="center" (click)="toggleRightSidenav()">
+
+    <ng-template ngFor let-item [ngForOf]="meetingData" let-i="index" [ngForTrackBy]="trackByFn">
+<!-- *ngFor="let meeting of meetingData"  -->
+      <mat-card class="meetingInFooter" [@flyInOut]="showMeeting ? 'open' : 'closed'" >
+        <mat-card-title class="clock">
+          {{ meetingData[i].StartTime | date:'HH:mm'}} - {{ meetingData[i].EndTime | date:'HH:mm'}}
+        </mat-card-title>
+        <mat-card-subtitle class="subject">
+          {{ meetingData[i].Subject }}
+        </mat-card-subtitle>
+        <mat-card-content class="organizer">
+          {{ meetingData[i].Organizer }}
+        </mat-card-content>
+      </mat-card>
+
+    </ng-template>
+
+  </div>
+
 </div>

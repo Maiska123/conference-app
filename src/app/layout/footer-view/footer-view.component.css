@@ -1,13 +1,43 @@
 .center {
   display: flex;
+  flex-direction: row-reverse;
+  height: inherit;
   background-color:rgba(0, 0, 0, 0.075);
-  justify-content: center;
-  height: var(--footer-height);
-  top: 0;
-  left: 0;
+  justify-content: flex-end;
+  align-items: center;
+  align-content: center;
+  padding-left: 5vw;
+  /* padding-top: 6vh; */
 }
 
 
 .center h1{
   align-self: center;
+}
+
+.meetingInFooter{
+  color: rgb(255, 255, 255);
+  min-width: 20vw;
+  max-width: 30vw;
+  height: max-content;
+
+}
+
+.clock{
+  color: rgba(151, 151, 151, 1);
+  font-size: medium;
+  font-weight: 600;
+  margin-bottom: 1vh;
+}
+
+.subject{
+  font-size: larger;
+  font-weight: bolder;
+  margin-bottom: 1vh;
+}
+
+.organizer{
+  color: rgba(151, 151, 151, 1);
+  font-size: medium;
+  font-weight: 600;
 }
