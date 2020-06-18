@@ -3,8 +3,8 @@
     {
         "Subject": "Meidän palaveri 1",
         "Organizer": "Miska Hannunkivi",
-        "StartTime": "2020-06-18T11:41:00",
-        "EndTime": "2020-06-18T11:42:00",
+        "StartTime": "2020-06-18T12:15:00",
+        "EndTime": "2020-06-18T12:16:00",
         "Participants": [
             {
                 "Name": "Miska Hannunkivi",
@@ -24,32 +24,32 @@
     {
         "Subject": "Meidän palaveri 2",
         "Organizer": "Miska Hannunkivi",
-        "StartTime": "2020-06-18T11:42:00",
-        "EndTime": "2020-06-18T11:43:00",
+        "StartTime": "2020-06-18T12:16:00",
+        "EndTime": "2020-06-18T12:17:00",
         "Participants": null,
         "Description": "Liirum sum laarum"
     },
     {
         "Subject": "Meidän palaveri 3",
         "Organizer": "Miska Hannunkivi",
-        "StartTime": "2020-06-18T11:43:00",
-        "EndTime": "2020-06-18T11:44:00",
+        "StartTime": "2020-06-18T12:17:00",
+        "EndTime": "2020-06-18T12:18:00",
         "Participants": null,
         "Description": null
     },
     {
         "Subject": "Meidän palaveri 4",
         "Organizer": "Miska Hannunkivi",
-        "StartTime": "2020-06-18T11:44:00",
-        "EndTime": "2020-06-18T11:45:00",
+        "StartTime": "2020-06-18T12:18:00",
+        "EndTime": "2020-06-18T12:19:00",
         "Participants": null,
         "Description": null
     },
     {
         "Subject": "Meidän palaveri 5",
         "Organizer": "Miska Hannunkivi",
-        "StartTime": "2020-06-18T11:45:00",
-        "EndTime": "2020-06-18T12:46:00",
+        "StartTime": "2020-06-18T12:19:00",
+        "EndTime": "2020-06-18T14:20:00",
         "Participants": null,
         "Description": null
     }
