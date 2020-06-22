@@ -1,0 +1,60 @@
+
+[
+
+  {
+      "Subject": "Meidän palaveri 1",
+      "Organizer": "Miska Hannunkivi",
+      "StartTime":  "2020-06-22T10:10:00",
+      "EndTime":  "2020-06-22T11:00:00",
+      "Participants": [
+          {
+              "Name": "Miska Hannunkivi",
+              "Title": "Software Developer"
+          },
+          {
+              "Name": "Jussi Vaittinen",
+              "Title": "CEO"
+          },
+          {
+              "Name": "Maka",
+              "Title": "Rooni"
+          }
+      ],
+      "Description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque dapibus nibh ut aliquet placerat. Donec facilisis facilisis ultrices. Duis id pulvinar ipsum. Vestibulum a ultrices dolor. Quisque ac consequat nisi, eget fringilla ante. Proin et odio a mauris commodo sagittis. Curabitur vestibulum mauris in viverra cursus. Integer non justo diam. Fusce suscipit quam sed risus eleifend rutrum sed a ipsum."
+  },
+  {
+      "Subject": "Meidän palaveri 2",
+      "Organizer": "Miska Hannunkivi",
+      "StartTime":  "2020-06-22T11:00:00",
+      "EndTime":  "2020-06-22T12:30:00",
+      "Participants": null,
+      "Description": "Liirum sum laarum"
+  },
+  {
+      "Subject": "Meidän palaveri 3",
+      "Organizer": "Miska Hannunkivi",
+      "StartTime":  "2020-06-22T12:30:00",
+      "EndTime":  "2020-06-22T13:45:00",
+      "Participants": null,
+      "Description": null
+  },
+  {
+      "Subject": "Meidän palaveri 4",
+      "Organizer": "Miska Hannunkivi",
+      "StartTime":  "2020-06-22T13:45:00",
+      "EndTime":  "2020-06-22T14:00:00",
+      "Participants": null,
+      "Description": null
+  },
+  {
+      "Subject": "Meidän palaveri 5",
+      "Organizer": "Miska Hannunkivi",
+      "StartTime":  "2020-06-22T14:00:00",
+      "EndTime": "2020-06-22T15:00:00",
+      "Participants": null,
+      "Description": null
+  }
+
+
+
+]

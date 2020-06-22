@@ -17,6 +17,7 @@ export class DashboardComponent implements OnInit, OnDestroy{
   meeting: Meeting;
   meetingReload: boolean;
   timeOut: Date;
+  meetingsData: Meeting[];
 
   currentMeeting: number;
   receivedChildMessage: boolean;
@@ -33,8 +34,12 @@ export class DashboardComponent implements OnInit, OnDestroy{
   ngOnInit() {
     this.meetingSubscription = this.meetingsService.getMeetings().subscribe(currentMeetings => {
       this.allMeetings = currentMeetings.reverse();
+      this.meetingsData = currentMeetings;
       this.currentMeeting = currentMeetings.length;
       this.meeting = currentMeetings[0];
+      console.log(currentMeetings);
+      console.log(this.meeting);
+      console.log(this.currentMeeting);
     });
 
     this.clockSubscription = this.clockService.getTime().subscribe(time => {
@@ -57,8 +62,7 @@ export class DashboardComponent implements OnInit, OnDestroy{
 
     } else { this.meetingReload = event;
              this.currentMeeting = --this.currentMeeting;
-             console.log(this.currentMeeting);
-             this.meeting = this.allMeetings[this.currentMeeting];
+             this.meeting = this?.allMeetings[this?.currentMeeting];
 
              this.allMeetings.pop();
 

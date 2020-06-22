@@ -1,13 +1,12 @@
-import { Component, OnInit, Input, OnDestroy, ViewChild, OnChanges } from '@angular/core';
+import { Component, OnInit, Input, OnDestroy, ViewChild, OnChanges, AfterViewInit, ElementRef } from '@angular/core';
 import { Meeting } from '../../interfaces/meeting.interface';
 import { MeetingsService } from '../../services/meetings.service';
 import { ClockService } from '../../services/clock.service';
-import { Subscription } from 'rxjs';
+import { Subscription, BehaviorSubject } from 'rxjs';
 import { trigger, state, style, transition, animate } from '@angular/animations';
 import { MatSidenav } from '@angular/material/sidenav';
 import { SidenavService } from '../../services/sidenav-details.service';
 import { TimeTile } from '../../interfaces/timeTiles.interface';
-
 
 @Component({
   selector: 'app-calendar-view',
@@ -33,14 +32,15 @@ import { TimeTile } from '../../interfaces/timeTiles.interface';
     ]),
   ],
 })
-export class CalendarViewComponent implements OnInit, OnDestroy, OnChanges{
+export class CalendarViewComponent implements OnInit, OnDestroy, OnChanges, AfterViewInit{
+
 
 
   constructor(private meetingsService: MeetingsService,
               private clockService: ClockService,
               private sidenavService: SidenavService) { }
 
-  @Input() meetingData: Meeting;
+  // @Input() meetingData: Meeting[];
   @Input() TimeIn: Date;
 
   private clockSubscription: Subscription;
@@ -48,29 +48,46 @@ export class CalendarViewComponent implements OnInit, OnDestroy, OnChanges{
   public meetings: Meeting[];
   public meetingSubscription: Subscription;
   public showDetails = false;
+  public detailMeeting: Meeting;
 
+  public runningTime = '0px';
+  public meetingFromTop = '0px';
 
-  displayedColumns: string[] = ['subject', 'organizer', 'weight', 'symbol'];
+  secondsPerDay = 86400;
+  threeHoursInSeconds = 10800000;
+  public meetingClicked: Meeting;
 
-  stylesObj = {
+  public meetingsBehaviour = new BehaviorSubject<Meeting>(null);
+
+  // @ViewChild('MatGridList') timetableView: ElementRef;
+  @ViewChild('myDiv', {read: ElementRef, static: false}) myDiv: ElementRef;
+
+  heightOfTimetable: any;
+  contentHeight: string;
+  contentHeightNumber = 2544;
+
+  displayedColumns: string[] = ['subject', 'organizer', 'weight', 'symbol']; // bloat
+
+  stylesObjOld = {
+    cursor: 'pointer',
+    position: 'absolute',
     'font-size': '1.1em',
     color: 'black',
+    overflow: 'hidden',
     'font-family': 'Lato',
-    'margin-top': '200px',
-    top: '3vh',
-    'max-width': '70%',
+    // 'margin-top': '200px',
+    'max-width': '20vw',
     width: '-webkit-fill-available',
     'border-left-width': '1vw',
     'border-left-color': 'yellow',
     'border-left-style': 'solid',
     'box-shadow': '3px 6px 20px 0px rgba(0,0,0,0.2)',
     'background-color': 'white',
-    left: '2.3vw',
     padding: '1vw',
   };
 
 
-  // 1 hour is 100px height => 1min = 1.66px, 1s = 0.0277px ^
+  // 1 hour is 100px height => 1min = 1.66px, 1s = 0.0277px ^ actually 106px
   timeTiles: TimeTile[] = [
     {text: '00:00', cols: 1, rows: 1},
     {text: '01:00', cols: 1, rows: 1},
@@ -100,17 +117,51 @@ export class CalendarViewComponent implements OnInit, OnDestroy, OnChanges{
   ];
 
   ngOnInit() {
+    this.meetingSubscription = this.meetingsService.getMeetings().subscribe(currentMeetings => {
+      this.meetings = currentMeetings;
+    });
 
     this.clockSubscription = this.clockService.getTime()
     .subscribe(time => {
       this.time = time;
+      // running time is the amount of pixels from the top of the timetable, getTime() gives UTC seconds from 1970...
+      this.runningTime = Math.round((((time.getTime() + this.threeHoursInSeconds) / 1000) % this.secondsPerDay)
+                                    * (this.heightOfTimetable / this.secondsPerDay))
+                                    + 19 + 'px' ;
     });
 
-    this.meetingSubscription = this.meetingsService.getMeetings()
-    .subscribe(freshMeetings => {
-      this.meetings = freshMeetings;
-    });
   }
+
+  ngAfterViewInit(){
+    // console.log('divheight: ' + this.myDiv.nativeElement.offsetHeight); // <-- WORKS!
+    this.heightOfTimetable = this.myDiv.nativeElement.offsetHeight;
+
+  }
+
+  getplacement(meeting){
+    let top = '0px';
+    const meetingDateTime = new Date(meeting.StartTime);
+
+    // console.log('meetingss: ' + meeting.StartTime);
+    // console.log('meetingss: ' + meetingDateTime.getTime());
+
+    top = Math.round(Math.round((((meetingDateTime.getTime() + this.threeHoursInSeconds) / 1000) % this.secondsPerDay)
+      * ((this.heightOfTimetable) / this.secondsPerDay)))
+      + 15 + 'px';
+
+    // console.log('meetingss: ' + top);
+
+    return top;
+  }
+
+  getDuration(meeting){
+    let height = '0px';
+
+    height = (this.heightOfTimetable / 24) + 'px';
+
+    return height;
+  }
+
 
   ngOnChanges() {
 
@@ -118,12 +169,28 @@ export class CalendarViewComponent implements OnInit, OnDestroy, OnChanges{
 
   ngOnDestroy(): void {
     this.clockSubscription.unsubscribe();
-    this.meetingSubscription.unsubscribe();
   }
 
   toggleRightSidenav() {
     this.sidenavService.toggle();
+    this.sidenavService.open();
+    this.showDetails = true;
   }
 
+  showDetailFunc(i: number){
+    // this.detailMeeting = this.meetings[i];
+    this.meetingsBehaviour.next(this.meetingClicked);
+    this.toggleRightSidenav();
+    this.showDetails = true;
+  }
+
+
+  showDetailsBehaviour(meeting: Meeting){
+    this.showDetails = true;
+    this.meetingClicked = meeting;
+    this.detailMeeting = meeting;
+    this.meetingsBehaviour.next(meeting);
+    this.toggleRightSidenav();
+  }
 
 }

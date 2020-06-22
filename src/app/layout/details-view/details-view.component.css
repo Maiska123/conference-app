@@ -1,3 +1,17 @@
+:host{
+  z-index: 999;
+  width: inherit;
+}
+
+.mat-sidenav{
+  width: inherit;
+}
+
+.mat-sidenav-container{
+  z-index: 999;
+  width: inherit;
+}
+
 .rightSidenav {
 	z-index: 999;
 }
@@ -11,6 +25,8 @@
 }
 
 .navigation{
+  cursor: pointer;
+  position: sticky;
   z-index: 10;
   top: 0;
   height: 5rem;
@@ -18,8 +34,8 @@
   background-color: var(--yellow);
 }
 
-.meeting-description{
-  /* margin-top: 2em; */
+.desc{
+  margin-bottom: 20vh;
 }
 
 .row{

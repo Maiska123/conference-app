@@ -1,10 +1,11 @@
-import { Component, OnInit, Input, OnDestroy, ViewChild, AfterViewInit } from '@angular/core';
+import { Component, OnInit, Input, OnDestroy, ViewChild, AfterViewInit, OnChanges } from '@angular/core';
 import { Meeting } from '../../interfaces/meeting.interface';
-import { Subscription } from 'rxjs';
+import { Subscription, BehaviorSubject } from 'rxjs';
 import { MeetingsService } from '../../services/meetings.service';
 import { trigger, state, style, transition, animate } from '@angular/animations';
 import { MatSidenav } from '@angular/material/sidenav';
 import { SidenavService } from '../../services/sidenav-details.service';
+import { subscribeOn } from 'rxjs/operators';
 
 @Component({
   selector: 'app-details-view',
@@ -14,7 +15,7 @@ import { SidenavService } from '../../services/sidenav-details.service';
     trigger('openClose', [
       // ...
       state('open', style({
-        opacity: 0
+        opacity: 1
       })),
       state('closed', style({
         opacity: 1
@@ -29,55 +30,62 @@ import { SidenavService } from '../../services/sidenav-details.service';
     trigger('arrow', [
       // ...
       state('open', style({
-        opacity: 0,
-        transform: 'translate(50%, 50%) rotate(90deg)'
+        opacity: 1,
+        // transform: 'translate(50%, 50%) rotate(90deg)'
       })),
       state('closed', style({
         opacity: 1,
-        transform: 'translate(0%, 0%) rotate(0deg)'
+        // transform: 'translate(0%, 0%) rotate(0deg)'
       })),
       transition('* => *', [
-        animate('0.3s ease')
+        animate('0.3s ease-in')
       ]),
       transition('open => closed', [
-        animate('0.2s ease')
+        animate('0.2s ease-in')
       ]),
     ])
   ],
 })
-export class DetailsViewComponent implements OnInit, OnDestroy, AfterViewInit {
+export class DetailsViewComponent implements OnInit, OnDestroy, AfterViewInit, OnChanges {
 
   // @Input() meetingData: Meeting;
   @Input() meetingData: Meeting;
-  @Input() public toggleActive = false;
+  // @Input() public
+  @Input() public toggleActive: boolean;
+  activeMeeting = new BehaviorSubject<any>(null);
 
   @ViewChild('rightSidenav') public sidenav: MatSidenav;
 
 
   panelOpenState = false;
 
-  public meetingDataOld: Meeting;
-  public meetingSubscription: Subscription;
+  // public meetingSubscription: Subscription;
   // public toggleActive = false;
   constructor(
-    private meetingsService: MeetingsService,
+    // private meetingsService: MeetingsService,
     private sidenavService: SidenavService
     ) { }
 
   ngOnInit() {
-    this.meetingSubscription = this.meetingsService.getMeetings().subscribe(freshMeetings => this.meetingDataOld = freshMeetings[0]);
+
   }
 
   ngAfterViewInit(): void {
     this.sidenavService.setSidenav(this.sidenav);
   }
 
+  ngOnChanges(meeting): void {
+    this.activeMeeting.next(this.meetingData);
+    // this.toggleActive = !this.toggleActive ;
+    // this.toggleRightSidenav();
+  }
+
   ngOnDestroy(): void {
-    this.meetingSubscription.unsubscribe();
+    // this.meetingSubscription.unsubscribe();
   }
 
   toggleRightSidenav() {
-    this.toggleActive = !this.toggleActive ;
+    this.activeMeeting.next(this.meetingData);
     this.sidenav.toggle();
   }
 

@@ -1,10 +1,10 @@
-<body>
+<body style="width: inherit;">
 
 
 
-  <div class="timetable-container">
+  <div class="timetable-container" >
 
-    <div class="roomdata">
+    <div class="roomdata" style="z-index: 6;">
 
       <h3>{{ 'palaverikatos' | uppercase}}</h3>
       <h2>{{ 'kesä tänään' | uppercase}}</h2>
@@ -12,38 +12,69 @@
     </div>
        <div class="background-block"></div>
 
-    <mat-grid-list cols="1" rowHeight="100px" class="timetable">
-      <mat-grid-tile
-        *ngFor="let tile of timeTiles"
-        [colspan]="tile.cols"
-        [rowspan]="tile.rows"
-        style="border-style: solid;border-color:rgba(214, 214, 214, 0.151);overflow: visible;">
-        <div class="clockan"> {{tile.text}} </div>
-      </mat-grid-tile>
-    </mat-grid-list>
 
-    <mat-grid-list cols="1" rows="24" rowHeight="100px" style="position: inherit;top:0;">
-      <mat-grid-tile *ngFor="let meeting of meetings"  style="position: relative; overflow:  visible">
 
-        <!-- <table>
-          <th></th>
-          <tr>      </tr>
-        </table> -->
+    <div >
+      <mat-grid-list #myDiv cols="1" rowHeight="100px" class="timetable" >
+        <mat-grid-tile
+          *ngFor="let tile of timeTiles"
+          [colspan]="tile.cols"
+          [rowspan]="tile.rows"
+          style="border-style: solid;border-color:rgba(214, 214, 214, 0.151);overflow: visible;">
+          <div class="clockan"> {{tile.text}} </div>
+        </mat-grid-tile>
 
-            <mat-card [ngStyle]="stylesObj"> <!-- class="meeting-card"  -->
-              <mat-card-title style="font-weight: 900;font-size:larger;font-kerning:none">
-                {{  meeting.Subject }}
-              </mat-card-title>
-              <mat-card-subtitle>
-                {{  meeting.Organizer | uppercase}}
-              </mat-card-subtitle>
-              <mat-card-content>
-                Meeting blaa blaa
-              </mat-card-content>
-            </mat-card>
+        <div class="pallura" [ngStyle]="{'top': runningTime }"></div>
+        <div class="viiva" [ngStyle]="{'top': runningTime }"></div>
 
-      </mat-grid-tile >
-    </mat-grid-list>
+      </mat-grid-list>
+    </div>
+    <!-- <mat-grid-list cols="1" rows="24" rowHeight="100px" style="position: inherit;top:0;">
+
+      <ng-template ngFor let-item [ngForOf]="meetings" let-i="index" >
+
+         <mat-grid-tile style="position: relative; overflow:  visible"> <!-- *ngFor="let meeting of meetings"  -->
+
+          <!-- <table>
+            <th></th>
+            <tr>      </tr>
+          </table>
+
+              <mat-card [ngStyle]="stylesObj" (click)="showDetailFunc(i)"> <!-- class="meeting-card"
+                <mat-card-title style="font-weight: 900;font-size:larger;font-kerning:none">
+                  {{  meetings[i].Subject }}
+                </mat-card-title>
+                <mat-card-subtitle>
+                  {{  meetings[i].Organizer | uppercase}}
+                </mat-card-subtitle>
+                <mat-card-content>
+                  Meeting blaa blaa
+                </mat-card-content>
+              </mat-card>
+
+        </mat-grid-tile >
+    </ng-template>
+    </mat-grid-list> -->
+
+    <mat-card *ngFor="let meeting of meetings; let i = index"
+              [style.top]="getplacement(meeting)"
+              [style.height]="getDuration(meeting)"
+              (click)="showDetailsBehaviour(meeting)"
+              class="meeting-card"> <!-- class="meeting-card"  [ngStyle]="{'top': meetingFromTop }"  -->
+      <mat-card-title style="font-weight: 900;font-size:larger;font-kerning:none">
+        <!-- {{  $any((meeting | async))?.Subject }} -->
+        {{  meeting.Subject }}
+      </mat-card-title>
+      <mat-card-subtitle>
+        <!-- {{  $any((meeting | async))?.Organizer | uppercase}} -->
+        {{  meeting.Organizer | uppercase}}
+      </mat-card-subtitle>
+      <!-- <mat-card-content>
+        Meeting blaa blaa
+      </mat-card-content> -->
+    </mat-card>
+
+
   </div>
 
 
@@ -53,4 +84,4 @@
 
 
 
-<app-details-view [toggleActive]="showDetails" [meetingData]="meetings[0]"></app-details-view>
+ <app-details-view  [meetingData]="detailMeeting" [toggleActive]="showDetails"></app-details-view> <!--[toggleActive]="showDetails" -->

@@ -1,5 +1,6 @@
 :host{
-  overflow: auto;
+  overflow-x: hidden;
+  width: inherit;
 }
 
 app-details-view{
@@ -12,8 +13,9 @@ app-details-view{
   background-color: white;
   padding-bottom: 2vh;
   position: fixed;
+  width: inherit;
   top: 0;
-  right: 19vw;
+  margin-left: 2vw;
   height: 12vh;
   box-shadow: 0 0 30px 20px white;
   overflow: hidden;
@@ -29,6 +31,7 @@ app-details-view{
 }
 
 .timetable-container{
+  width: inherit;
   -webkit-align-items: stretch;
   align-items: stretch;
   margin-top: 12vh;
@@ -41,7 +44,7 @@ body{
 }
 
 :host::-webkit-scrollbar{
-  width: 0.25rem;
+  width: 0.45rem;
 }
 
 :host::-webkit-scrollbar-track{
@@ -83,6 +86,47 @@ table {
 }
 
 .meeting-card{
+  z-index: 5;
   position: absolute;
   left: 8vw;
+  cursor: pointer;
+  position: absolute;
+  font-size: 1.1em;
+  color: black;
+  overflow: hidden;
+  font-family: Lato;
+  /* // margin-top: 200px; */
+  max-width: 20vw;
+  width: -webkit-fill-available;
+  border-left-width: 1vw;
+  border-left-color: yellow;
+  border-left-style: solid;
+  box-shadow: 3px 6px 20px 0px rgba(0,0,0,0.2);
+  background-color: white;
+  padding: 0 !important;
+}
+
+
+.pallura{
+  background: #fc0;
+  -webkit-border-radius: 50%;
+  border-radius: 50%;
+  content: "";
+  position: absolute;
+  height: 12px;
+  left: 6.3vw;
+  margin-left: -6.5px;
+  margin-top: -5px;
+  width: 12px;
+  z-index: 505;
+}
+
+.viiva{
+  position: absolute;
+    z-index: 505;
+    border-top: #fc0 solid 2px;
+    left: 0;
+    right: 0;
+    pointer-events: none;
+    left: 6.3vw;
 }

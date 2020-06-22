@@ -65,11 +65,15 @@ export class CurrentViewComponent implements OnInit, OnDestroy, OnChanges {
   private clockSubscription: Subscription;
   private meetingSubscription: Subscription;
 
-  constructor() {
+  constructor(private meetingsService: MeetingsService) {
 
   }
 
   ngOnInit(): void {
+
+  //     this.meetingSubscription = this.meetingsService.getMeetings().subscribe(currentMeetings => {
+  //       this.meetings = currentMeetings.reverse();
+  //     });
 
   }
 
@@ -89,8 +93,8 @@ export class CurrentViewComponent implements OnInit, OnDestroy, OnChanges {
 
   updateTimeLeft(){
 
-    const end = new Date(this.meetingData.EndTime).valueOf();
-    const start = new Date(this.meetingData.StartTime).valueOf();
+    const end = new Date(this.meetingData?.EndTime).valueOf();
+    const start = new Date(this.meetingData?.StartTime).valueOf();
     const current = new Date(this.TimeIn).valueOf();
 
     if (current > start  && current < end){
