@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, OnDestroy, ViewChild, OnChanges, AfterViewInit, ElementRef } from '@angular/core';
+import { Component, OnInit, Input, OnDestroy, ViewChild, OnChanges, AfterViewInit, ElementRef, HostListener } from '@angular/core';
 import { Meeting } from '../../interfaces/meeting.interface';
 import { MeetingsService } from '../../services/meetings.service';
 import { ClockService } from '../../services/clock.service';
@@ -32,6 +32,7 @@ import { TimeTile } from '../../interfaces/timeTiles.interface';
     ]),
   ],
 })
+
 export class CalendarViewComponent implements OnInit, OnDestroy, OnChanges, AfterViewInit{
 
 
@@ -54,17 +55,21 @@ export class CalendarViewComponent implements OnInit, OnDestroy, OnChanges, Afte
   public meetingFromTop = '0px';
 
   secondsPerDay = 86400;
-  threeHoursInSeconds = 10800000;
+  threeHoursInSeconds = (3 * 3600);
   public meetingClicked: Meeting;
 
+  fontSizeTiny = 15;
+  fontSizeBig = 19;
   public meetingsBehaviour = new BehaviorSubject<Meeting>(null);
 
   // @ViewChild('MatGridList') timetableView: ElementRef;
   @ViewChild('myDiv', {read: ElementRef, static: false}) myDiv: ElementRef;
-
+  @ViewChild('slide', {read: ElementRef, static: false}) slides: ElementRef;
   heightOfTimetable: any;
   contentHeight: string;
   contentHeightNumber = 2544;
+
+  scrollToViewCount = 0;
 
   displayedColumns: string[] = ['subject', 'organizer', 'weight', 'symbol']; // bloat
 
@@ -116,6 +121,21 @@ export class CalendarViewComponent implements OnInit, OnDestroy, OnChanges, Afte
     {text: '23:00', cols: 1, rows: 1},
   ];
 
+  @HostListener('scroll', ['$event']) // for window scroll events
+  onScroll($event){
+    console.log('onScroll! count is 0 again');
+    this.scrollToViewCount = 0;
+  }
+
+  animate() {
+    this.slides.nativeElement.scrollIntoView({behavior: 'smooth'});
+  }
+
+  emptyCount() {
+    this.scrollToViewCount = 0;
+  }
+
+
   ngOnInit() {
     this.meetingSubscription = this.meetingsService.getMeetings().subscribe(currentMeetings => {
       this.meetings = currentMeetings;
@@ -124,10 +144,16 @@ export class CalendarViewComponent implements OnInit, OnDestroy, OnChanges, Afte
     this.clockSubscription = this.clockService.getTime()
     .subscribe(time => {
       this.time = time;
+      ++this.scrollToViewCount;
+      if (this.scrollToViewCount > 15 ){
+        this.animate();
+        this.scrollToViewCount = 0;
+      }
       // running time is the amount of pixels from the top of the timetable, getTime() gives UTC seconds from 1970...
-      this.runningTime = Math.round((((time.getTime() + this.threeHoursInSeconds) / 1000) % this.secondsPerDay)
-                                    * (this.heightOfTimetable / this.secondsPerDay))
-                                    + 19 + 'px' ;
+      this.runningTime = Math.round((((time.getTime()  / 1000) ) % this.secondsPerDay)
+                                    * ((this.heightOfTimetable) / this.secondsPerDay))
+                                    + 319 + 'px' ;
+
     });
 
   }
@@ -138,6 +164,7 @@ export class CalendarViewComponent implements OnInit, OnDestroy, OnChanges, Afte
 
   }
 
+
   getplacement(meeting){
     let top = '0px';
     const meetingDateTime = new Date(meeting.StartTime);
@@ -145,9 +172,9 @@ export class CalendarViewComponent implements OnInit, OnDestroy, OnChanges, Afte
     // console.log('meetingss: ' + meeting.StartTime);
     // console.log('meetingss: ' + meetingDateTime.getTime());
 
-    top = Math.round(Math.round((((meetingDateTime.getTime() + this.threeHoursInSeconds) / 1000) % this.secondsPerDay)
+    top = Math.round(Math.round((((meetingDateTime.getTime() / 1000) ) % this.secondsPerDay)
       * ((this.heightOfTimetable) / this.secondsPerDay)))
-      + 15 + 'px';
+       + 'px';
 
     // console.log('meetingss: ' + top);
 
@@ -157,11 +184,31 @@ export class CalendarViewComponent implements OnInit, OnDestroy, OnChanges, Afte
   getDuration(meeting){
     let height = '0px';
 
-    height = (this.heightOfTimetable / 24) + 'px';
+    const startTime = new Date (meeting.StartTime);
+    const endTime = new Date (meeting.EndTime);
+    const differenceInTime = (endTime.getTime() - startTime.getTime()) / 1000;
+    // console.log('for: ' + meeting.Subject );
+    // console.log('difference: ' + differenceInTime);
+    height = (this.heightOfTimetable / this.secondsPerDay) * differenceInTime + 'px';
 
     return height;
   }
 
+  getFontSize(meeting){
+    let height = 0;
+
+    const startTime = new Date (meeting.StartTime);
+    const endTime = new Date (meeting.EndTime);
+    const differenceInTime = (endTime.getTime() - startTime.getTime()) / 1000;
+    // console.log('for: ' + meeting.Subject );
+    // console.log('difference: ' + differenceInTime);
+    // Font-size is calculated from meeting lenght
+    height = Math.round(((this.heightOfTimetable / this.secondsPerDay) * differenceInTime) / 6) ;
+    // height = 18px from 1h and 9px from 30min
+
+    height < 18 ? height = this.fontSizeTiny : height = this.fontSizeBig;
+    return height + 'px';
+  }
 
   ngOnChanges() {
 

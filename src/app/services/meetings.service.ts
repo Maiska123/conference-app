@@ -53,4 +53,24 @@ export class MeetingsService {
     };
   }
 
+  // meetingInProgress(){
+
+  //   const end = new Date(this.meetingData?.EndTime).valueOf();
+  //   const start = new Date(this.meetingData?.StartTime).valueOf();
+  //   const current = new Date(this.TimeIn).valueOf();
+
+  //   if (current > start  && current < end){
+  //     this.showMeeting = true;
+  //     const timePassed = ((1 - (current - start ) / (end - start )) * (280));
+  //     this.timeLeft = 280 - timePassed;
+
+  //   } else { this.timeLeft = 280;
+  //            this.showMeeting = false;
+  //            this.nextMeeting.emit(this.showMeeting);
+  //           }
+  // }
+
+
+
+
 }

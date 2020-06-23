@@ -1,6 +1,8 @@
 /* You can add global styles to this file, and also import other style files */
 
 :root {
+  font-kerning:none;
+  -webkit-font-smoothing: subpixel-antialiased;
   --primary-color: #fff;
   --background-color: #e5e5e5;
   --text-color: #2d2d2d;
@@ -16,6 +18,17 @@
   --current-view-width: 67vw;
   --current-view-height: 70vh;
 
+  ::-webkit-scrollbar{
+    width: 0.45rem;
+  }
+
+  ::-webkit-scrollbar-track{
+    background: #fc0;
+  }
+
+  ::-webkit-scrollbar-thumb{
+    background: yellow;
+  }
 
 }
 

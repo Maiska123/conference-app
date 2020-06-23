@@ -7,6 +7,7 @@ app-details-view{
   z-index: 10;
 }
 
+
 .roomdata{
   z-index: 1;
   box-sizing: border-box;
@@ -43,18 +44,6 @@ body{
   margin: 0;
 }
 
-:host::-webkit-scrollbar{
-  width: 0.45rem;
-}
-
-:host::-webkit-scrollbar-track{
-  background: #fc0;
-}
-
-:host::-webkit-scrollbar-thumb{
-  background: yellow;
-}
-
 table {
   width: 100%;
 }
@@ -75,28 +64,63 @@ table {
 
 }
 
+.grid-div .mat-grid-tile::after{
+  content: '';
+  border-bottom: #dadce0 1px solid;
+  position: absolute;
+  width: 97%;
+  right: 0;
+  margin-top: -1px;
+  z-index: 3;
+  pointer-events: none;
+}
+
 .clockan{
   position: relative;
-  right: 14.5vw;
-  bottom: 3.1em;
   padding: 1em;
   background-color: white;
-  padding-left: 3em;
-  font-weight: 800;
+  padding-left: 1em;
+  font-weight: 700;
+  font-size: small;
+  top: -50px ;
+}
+
+.clocks-n-sandals{
+  padding-top: 20px;
+  display: flex;
+  overflow: hidden;
+  -webkit-align-items: stretch;
+  align-items: stretch;
+  width: inherit;
+  height: 2600px;
+}
+
+.grid-div{
+  overflow-x: hidden;
+  border-right: white 1px solid;
+  overflow: visible;
+  flex: 6;
+}
+
+.clocks-div{
+  overflow-x: hidden;
+  position: relative;
+  height: inherit;
+  padding-right: 0;
+  text-align: right;
+  flex: 1;
 }
 
 .meeting-card{
   z-index: 5;
-  position: absolute;
-  left: 8vw;
+  position: relative;
+  left: 12px;
   cursor: pointer;
-  position: absolute;
-  font-size: 1.1em;
   color: black;
   overflow: hidden;
   font-family: Lato;
   /* // margin-top: 200px; */
-  max-width: 20vw;
+  max-width: 24vw;
   width: -webkit-fill-available;
   border-left-width: 1vw;
   border-left-color: yellow;
@@ -106,6 +130,18 @@ table {
   padding: 0 !important;
 }
 
+.card-title{
+  font-weight: 900;
+  margin-top:0.5vw !important;
+  margin-left:0.5vw;
+}
+
+.card-subtitle{
+  font-weight: 700;
+  margin-left: 0.5vw;
+  font-size: x-small;
+  color: rgba(0, 0, 0, 0.3);
+}
 
 .pallura{
   background: #fc0;
@@ -114,8 +150,7 @@ table {
   content: "";
   position: absolute;
   height: 12px;
-  left: 6.3vw;
-  margin-left: -6.5px;
+  left: 0;
   margin-top: -5px;
   width: 12px;
   z-index: 505;
@@ -128,5 +163,4 @@ table {
     left: 0;
     right: 0;
     pointer-events: none;
-    left: 6.3vw;
 }

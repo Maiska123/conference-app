@@ -1,5 +1,5 @@
 
-<mat-sidenav-container>
+<mat-sidenav-container class="scroll">
 
   <mat-sidenav #rightSidenav mode="over"  class="rightSidenav"
         [fixedInViewport]="true" [fixedTopGap]="0" position="end"
@@ -8,8 +8,8 @@
 
         <div class="navigation"  (click)="toggleRightSidenav()" >
 
-          <svg xmlns="http://www.w3.org/2000/svg" [@arrow]="toggleActive ? 'open' : 'closed'" style="margin: 1.1em;z-index:inherit;" viewBox="0 0 24 24" fill="white" width="60px" height="40px"><path d="M0 0h24v24H0z" fill="none"/><path d="M11.67 3.87L9.9 2.1 0 12l9.9 9.9 1.77-1.77L3.54 12z"/></svg>
-          <span style="color:black;font-size:x-large;top:2.3vh;position:absolute;margin-left:2vw;">{{ meetingData?.Subject | uppercase }}</span>
+          <svg xmlns="http://www.w3.org/2000/svg" [@arrow]="toggleActive ? 'open' : 'closed'" style="margin: 1.1em;z-index:inherit;align-self:center;" viewBox="0 0 24 24" fill="white" width="60px" height="40px"><path d="M0 0h24v24H0z" fill="none"/><path d="M11.67 3.87L9.9 2.1 0 12l9.9 9.9 1.77-1.77L3.54 12z"/></svg>
+          <span style="color:black;font-size:x-large;align-self:center;position:relative;margin-left:2vw;">{{ meetingData?.Subject | uppercase }}</span>
         </div>
     <div class="meeting-description">
 

@@ -3,6 +3,7 @@
   width: inherit;
 }
 
+
 .mat-sidenav{
   width: inherit;
 }
@@ -32,6 +33,7 @@
   height: 5rem;
   color: var(--yellow);
   background-color: var(--yellow);
+  display: flex;
 }
 
 .desc{
