@@ -13,6 +13,7 @@ import { MatExpansionModule } from '@angular/material/expansion';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatTableModule } from '@angular/material/table';
 import { MatGridListModule } from '@angular/material/grid-list';
+import { MatListModule } from '@angular/material/list';
 
 @NgModule({
   imports: [  MatButtonModule,
@@ -26,7 +27,8 @@ import { MatGridListModule } from '@angular/material/grid-list';
               MatExpansionModule,
               MatSidenavModule,
               MatTableModule,
-              MatGridListModule],
+              MatGridListModule,
+              MatListModule],
   exports: [  MatButtonModule,
               MatCheckboxModule,
               MatToolbarModule,
@@ -38,7 +40,8 @@ import { MatGridListModule } from '@angular/material/grid-list';
               MatExpansionModule,
               MatSidenavModule,
               MatTableModule,
-              MatGridListModule]
+              MatGridListModule,
+              MatListModule]
 })
 
 

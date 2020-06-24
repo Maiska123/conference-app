@@ -6,8 +6,8 @@
 
     <div class="roomdata" style="z-index: 6;">
 
-      <h3>{{ 'palaverikatos' | uppercase}}</h3>
-      <h2>{{ 'kesä tänään' | uppercase}}</h2>
+      <h3 style="margin-bottom: 1vh">{{ 'palaverikatos' | uppercase}}</h3>
+      <h2 style="margin-top: 1vh">{{ 'kesä tänään' | uppercase}}</h2>
 
     </div>
        <div class="background-block"></div>
@@ -18,7 +18,7 @@
     <div class="clocks-n-sandals" >
 
         <div class="clocks-div">
-          <mat-grid-list #myDiv cols="1" rowHeight="100px">
+          <mat-grid-list #myAnotherDiv cols="1" rowHeight="100px">
           <mat-grid-tile
             *ngFor="let tile of timeTiles"
             [colspan]="tile.cols"
@@ -44,26 +44,29 @@
 
         </mat-grid-list>
 
-
-        <mat-card *ngFor="let meeting of meetings; let i = index"
-                  [style.top]="getplacement(meeting)"
-                  [style.height]="getDuration(meeting)"
-                  (click)="showDetailsBehaviour(meeting)"
-                  [style.fontSize]="getFontSize(meeting)"
-                  class="meeting-card"> <!-- class="meeting-card"  [ngStyle]="{'top': meetingFromTop }"  -->
-          <mat-card-title class="card-title">
-            <!-- {{  $any((meeting | async))?.Subject }} -->
-            {{  meeting.Subject }}
-          </mat-card-title>
-          <mat-card-subtitle class="card-subtitle">
-            <!-- {{  $any((meeting | async))?.Organizer | uppercase}} -->
-            {{  meeting.Organizer | uppercase}}
-          </mat-card-subtitle>
-          <!-- <mat-card-content>
-            Meeting blaa blaa
-          </mat-card-content> -->
-        </mat-card>
-
+        <!-- <mat-list>
+          <mat-list-item> -->
+            <mat-card *ngFor="let meeting of meetings; let i = index"
+                      [style.top]="getplacement(meeting)"
+                      [style.height]="getDuration(meeting)"
+                      [ngStyle]="{'left': widthFromLeft }"
+                      (click)="showDetailsBehaviour(meeting)"
+                      [style.fontSize]="getFontSize(meeting)"
+                      class="meeting-card"> <!-- class="meeting-card"  [ngStyle]="{'top': meetingFromTop }"  [style.left]="getClockWidth()" -->
+              <mat-card-title class="card-title">
+                <!-- {{  $any((meeting | async))?.Subject }} -->
+                {{  meeting.Subject }}
+              </mat-card-title>
+              <mat-card-subtitle class="card-subtitle">
+                <!-- {{  $any((meeting | async))?.Organizer | uppercase}} -->
+                {{  meeting.Organizer | uppercase}}
+              </mat-card-subtitle>
+              <!-- <mat-card-content>
+                Meeting blaa blaa
+              </mat-card-content> -->
+            </mat-card>
+          <!-- </mat-list-item>
+        </mat-list> -->
 
 
 

@@ -103,7 +103,6 @@ table {
 }
 
 .clocks-div{
-  overflow-x: hidden;
   position: relative;
   height: inherit;
   padding-right: 0;
@@ -113,8 +112,9 @@ table {
 
 .meeting-card{
   z-index: 5;
-  position: relative;
-  left: 12px;
+  display: flex;
+  flex-direction: column;
+  position: absolute;
   cursor: pointer;
   color: black;
   overflow: hidden;
@@ -125,7 +125,7 @@ table {
   border-left-width: 1vw;
   border-left-color: yellow;
   border-left-style: solid;
-  box-shadow: 3px 6px 20px 0px rgba(0,0,0,0.2);
+  box-shadow: 13px 3px 20px 0px rgba(0,0,0,0.2);
   background-color: white;
   padding: 0 !important;
 }

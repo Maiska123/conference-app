@@ -62,17 +62,20 @@ export class CalendarViewComponent implements OnInit, OnDestroy, OnChanges, Afte
   fontSizeBig = 19;
   public meetingsBehaviour = new BehaviorSubject<Meeting>(null);
 
-  // @ViewChild('MatGridList') timetableView: ElementRef;
   @ViewChild('myDiv', {read: ElementRef, static: false}) myDiv: ElementRef;
+  @ViewChild('myAnotherDiv', {read: ElementRef, static: false}) myAnotherDiv: ElementRef;
   @ViewChild('slide', {read: ElementRef, static: false}) slides: ElementRef;
   heightOfTimetable: any;
+  widthOfClocks: any;
   contentHeight: string;
   contentHeightNumber = 2544;
-
+  widthFromLeft = '0px';
   scrollToViewCount = 0;
 
-  displayedColumns: string[] = ['subject', 'organizer', 'weight', 'symbol']; // bloat
+  // this is obsolete
+  displayedColumns: string[] = ['subject', 'organizer', 'weight', 'symbol'];
 
+  // this is obsolete
   stylesObjOld = {
     cursor: 'pointer',
     position: 'absolute',
@@ -98,7 +101,6 @@ export class CalendarViewComponent implements OnInit, OnDestroy, OnChanges, Afte
     {text: '01:00', cols: 1, rows: 1},
     {text: '02:00', cols: 1, rows: 1},
     {text: '03:00', cols: 1, rows: 1},
-    {text: '03:00', cols: 1, rows: 1},
     {text: '04:00', cols: 1, rows: 1},
     {text: '05:00', cols: 1, rows: 1},
     {text: '06:00', cols: 1, rows: 1},
@@ -123,12 +125,21 @@ export class CalendarViewComponent implements OnInit, OnDestroy, OnChanges, Afte
 
   @HostListener('scroll', ['$event']) // for window scroll events
   onScroll($event){
-    console.log('onScroll! count is 0 again');
     this.scrollToViewCount = 0;
   }
 
+  @HostListener('window:resize', ['$event'])
+  onResize(event) {
+    console.log(event.target.innerWidth);
+    this.widthOfClocks = this.myAnotherDiv.nativeElement.offsetWidth + 12;
+    console.log(this.widthOfClocks);
+    this.widthFromLeft = this.widthOfClocks + 'px';
+    console.log(this.widthFromLeft);
+
+  }
+
   animate() {
-    this.slides.nativeElement.scrollIntoView({behavior: 'smooth'});
+    this.slides.nativeElement.scrollIntoView({ behavior: 'smooth',  block: 'center' });
   }
 
   emptyCount() {
@@ -152,7 +163,7 @@ export class CalendarViewComponent implements OnInit, OnDestroy, OnChanges, Afte
       // running time is the amount of pixels from the top of the timetable, getTime() gives UTC seconds from 1970...
       this.runningTime = Math.round((((time.getTime()  / 1000) ) % this.secondsPerDay)
                                     * ((this.heightOfTimetable) / this.secondsPerDay))
-                                    + 319 + 'px' ;
+                                    + 306 + 'px' ;
 
     });
 
@@ -161,7 +172,10 @@ export class CalendarViewComponent implements OnInit, OnDestroy, OnChanges, Afte
   ngAfterViewInit(){
     // console.log('divheight: ' + this.myDiv.nativeElement.offsetHeight); // <-- WORKS!
     this.heightOfTimetable = this.myDiv.nativeElement.offsetHeight;
-
+    this.widthOfClocks = this.myAnotherDiv.nativeElement.offsetWidth + 12;
+    // console.log('width : ' + this.widthOfClocks);
+    // console.log('height : ' + this. heightOfTimetable);
+    this.widthFromLeft = this.getClockWidth() + 'px';
   }
 
 
@@ -169,14 +183,9 @@ export class CalendarViewComponent implements OnInit, OnDestroy, OnChanges, Afte
     let top = '0px';
     const meetingDateTime = new Date(meeting.StartTime);
 
-    // console.log('meetingss: ' + meeting.StartTime);
-    // console.log('meetingss: ' + meetingDateTime.getTime());
-
-    top = Math.round(Math.round((((meetingDateTime.getTime() / 1000) ) % this.secondsPerDay)
-      * ((this.heightOfTimetable) / this.secondsPerDay)))
-       + 'px';
-
-    // console.log('meetingss: ' + top);
+    top = Math.round(Math.round((((meetingDateTime.getTime() / 1000) + this.threeHoursInSeconds) % this.secondsPerDay)
+      * (this.heightOfTimetable / this.secondsPerDay)))
+      + 20 + 'px';
 
     return top;
   }
@@ -187,9 +196,7 @@ export class CalendarViewComponent implements OnInit, OnDestroy, OnChanges, Afte
     const startTime = new Date (meeting.StartTime);
     const endTime = new Date (meeting.EndTime);
     const differenceInTime = (endTime.getTime() - startTime.getTime()) / 1000;
-    // console.log('for: ' + meeting.Subject );
-    // console.log('difference: ' + differenceInTime);
-    height = (this.heightOfTimetable / this.secondsPerDay) * differenceInTime + 'px';
+    height = (this.heightOfTimetable / this.secondsPerDay) * differenceInTime - 1 + 'px';
 
     return height;
   }
@@ -200,14 +207,16 @@ export class CalendarViewComponent implements OnInit, OnDestroy, OnChanges, Afte
     const startTime = new Date (meeting.StartTime);
     const endTime = new Date (meeting.EndTime);
     const differenceInTime = (endTime.getTime() - startTime.getTime()) / 1000;
-    // console.log('for: ' + meeting.Subject );
-    // console.log('difference: ' + differenceInTime);
-    // Font-size is calculated from meeting lenght
+
     height = Math.round(((this.heightOfTimetable / this.secondsPerDay) * differenceInTime) / 6) ;
     // height = 18px from 1h and 9px from 30min
 
     height < 18 ? height = this.fontSizeTiny : height = this.fontSizeBig;
     return height + 'px';
+  }
+
+  getClockWidth(){
+    return this.widthOfClocks;
   }
 
   ngOnChanges() {

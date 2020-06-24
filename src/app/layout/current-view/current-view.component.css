@@ -29,7 +29,14 @@
 .header{
 font-weight: lighter;
 font-size: 1.6em;
-max-height: 5.7vh;
+max-height: 7.7vh;
+min-height: 5.5vh;
+}
+
+.divider{
+  max-height: 1.2vh;
+  margin-top: 1vh;
+  min-height: 2.2vh;
 }
 
 .meetingInProgress{

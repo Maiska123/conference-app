@@ -36,6 +36,31 @@
   display: flex;
 }
 
+.meeting-subject{
+  color:black;
+  font-size:x-large;
+  align-self:center;
+  position:relative;
+  margin-left:3vw;
+}
+
+.arrow-back{
+  margin: 0.5em;
+  margin-left: 1em !important;
+  z-index: inherit;
+  align-self: center;
+}
+
+@media only screen and (max-width: 1360px) {
+  .meeting-subject{
+    color: black;
+    font-size: x-large;
+    align-self: center;
+    position: relative;
+    margin-left: 0;
+  }
+}
+
 .desc{
   margin-bottom: 20vh;
 }
