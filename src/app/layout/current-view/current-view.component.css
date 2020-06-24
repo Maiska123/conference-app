@@ -10,13 +10,12 @@
 
 .center h1{
   align-self: center;
-  font-size: 7vw;
+  font-size: 10vh;
   font-weight: bolder;
   line-height: 0.8em;
   word-wrap: break-word;
   position: relative;
   display: inline-block;
-  /* overflow: hidden; */
   padding: 0;
   margin: 0;
   inline-size: min-content;

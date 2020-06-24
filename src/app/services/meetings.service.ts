@@ -5,6 +5,7 @@ import { Observable, of } from 'rxjs';
 import { catchError, map, tap } from 'rxjs/operators';
 
 import { Meeting } from '../interfaces/meeting.interface';
+import { RoomData } from '../interfaces/room-data.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -12,6 +13,7 @@ import { Meeting } from '../interfaces/meeting.interface';
 export class MeetingsService {
 
   private meetingsUrl = './assets/meetings.json';  // URL to web api
+  private conferenceRoomUrl = './assets/conference-room.json';
 
   httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -29,9 +31,22 @@ export class MeetingsService {
     );
   }
 
+  getRoomName(): Observable<RoomData>  {
+    return this.http.get<RoomData>(this.conferenceRoomUrl)
+    .pipe(
+      tap(_ => console.log('fetched meetings')),
+      catchError(this.handleError<RoomData>('getRoomData'))
+    );
+  }
+
   getMeeting(){
     return this.getMeetings();
   }
+
+  getConferenceRoomName(){
+    return this.getRoomName();
+  }
+
 
   /**
    * Handle Http operation that failed.

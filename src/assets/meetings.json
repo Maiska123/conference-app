@@ -1,8 +1,8 @@
 [
 
     {
-        "Subject": "Meidän palaveri 1",
-        "Organizer": "Miska Hannunkivi",
+        "Subject": "Erilaisuus etätöissä -webinaarit",
+        "Organizer": "Paavo Kaurismäki",
         "StartTime":  "2020-06-24T09:00:00",
         "EndTime":  "2020-06-24T10:00:00",
         "Participants": [
@@ -19,11 +19,11 @@
                 "Title": "Rooni"
             }
         ],
-        "Description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque dapibus nibh ut aliquet placerat. Donec facilisis facilisis ultrices. Duis id pulvinar ipsum. Vestibulum a ultrices dolor. Quisque ac consequat nisi, eget fringilla ante. Proin et odio a mauris commodo sagittis. Curabitur vestibulum mauris in viverra cursus. Integer non justo diam. Fusce suscipit quam sed risus eleifend rutrum sed a ipsum."
+        "Description": "Erilaisuus etätöissä haastaa sekä työyhteisöjä että esimiehiä. Koronavirus on aiheuttanut usealla työpaikalla tilanteen, jossa etätyöt ovat välttämättömiä. Nämä webinaarit on suunniteltu tueksi ja avuksi erilaisuuden ymmärtämiseen ja huomioimiseen etätöiden näkökulmasta. Webinaarit sopivat niin etätöitä tekeville kuin etätyötä johtaville ja ohjaaville. Olitpa jo kokenut konkari tai vasta-alkaja, opit varmasti uutta itsestäsi ja muista!"
     },
     {
-        "Subject": "Meidän palaveri 2",
-        "Organizer": "Miska Hannunkivi",
+        "Subject": "Virtuaalivalmennukset tiimeille ja johtajille",
+        "Organizer": "Mervi Uusitalo",
         "StartTime":  "2020-06-24T10:00:00",
         "EndTime":  "2020-06-24T11:00:00",
         "Participants": [
@@ -60,11 +60,11 @@
               "Title": "Rooni"
             }
         ],
-        "Description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque dapibus nibh ut aliquet placerat. Donec facilisis facilisis ultrices. Duis id pulvinar ipsum. Vestibulum a ultrices dolor. Quisque ac consequat nisi, eget fringilla ante. Proin et odio a mauris commodo sagittis. Curabitur vestibulum mauris in viverra cursus. Integer non justo diam. Fusce suscipit quam sed risus eleifend rutrum sed a ipsum."
+        "Description": "Virtuaalivalmennus tiimeille ja johtajille korvaa nyt henkilökohtaisen läsnäolon. Onneksi kokemus läsnäolosta on mahdollista saada myös etänä – menettämättä hyödystä tai innostavuudesta lainkaan! Vastaan omalta osaltani haasteelliseen tilanteeseen tarjoamalla lyhyempiä ja tiiviimpiä virtuaalivalmennuksia työyhteisöjen ja johtamisen tueksi. Työnohjaukset, coaching ja 1-2 hengen Insights Discovery -profiiliavaamiset toimivat verkossa normaaliin tapaan."
     },
     {
-        "Subject": "Meidän palaveri 3",
-        "Organizer": "Miska Hannunkivi",
+        "Subject": "Avoimet webinaarit: muutos, etätyö, johtaminen ja stressinhallinta",
+        "Organizer": "Kalle Koivunen",
         "StartTime":  "2020-06-24T15:30:00",
         "EndTime":  "2020-06-24T18:00:00",
         "Participants": [
@@ -81,31 +81,23 @@
                 "Title": "Rooni"
             }
         ],
-        "Description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque dapibus nibh ut aliquet placerat. Donec facilisis facilisis ultrices. Duis id pulvinar ipsum. Vestibulum a ultrices dolor. Quisque ac consequat nisi, eget fringilla ante. Proin et odio a mauris commodo sagittis. Curabitur vestibulum mauris in viverra cursus. Integer non justo diam. Fusce suscipit quam sed risus eleifend rutrum sed a ipsum."
+        "Description": "Avoimet, ilmaiset webinaarit saivat loistavan vastaanoton! Täältä pääset ilmoittautumaan seuraaviin. Jokainen webinaari antaa sinulle konkreettisia työkaluja ja menetelmiä hyödynnettäväksi itsesi johtamisessa, muiden johtamisesssa, yhteistyössä sekä vuorovaikutuksessa. Etätyön yleistyttyä painotus on siinä, mutta opit sopivat erinomaisesti myös muihin työtilanteisiin. Linkkien takaa löydät tarkemmat kuvaukset webinaareista. Nähdään verkossa!"
     },
     {
-        "Subject": "Meidän palaveri 4",
+        "Subject": "Brainstormataan ideoita",
         "Organizer": "Miska Hannunkivi",
         "StartTime":  "2020-06-24T18:30:00",
         "EndTime":  "2020-06-24T19:00:00",
         "Participants": [
             {
-                "Name": "Miska Hannunkivi",
-                "Title": "Software Developer"
-            },
-            {
-                "Name": "Jussi Vaittinen",
-                "Title": "CEO"
-            },
-            {
-                "Name": "Maka",
-                "Title": "Rooni"
+                "Name": "Kaikki",
+                "Title": "Kynnelle kykenevät"
             }
         ],
-        "Description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque dapibus nibh ut aliquet placerat. Donec facilisis facilisis ultrices. Duis id pulvinar ipsum. Vestibulum a ultrices dolor. Quisque ac consequat nisi, eget fringilla ante. Proin et odio a mauris commodo sagittis. Curabitur vestibulum mauris in viverra cursus. Integer non justo diam. Fusce suscipit quam sed risus eleifend rutrum sed a ipsum."
+        "Description": "Noh, otsikossahan tuo jo näkyykin."
     },
     {
-        "Subject": "Meidän palaveri 5",
+        "Subject": "Kuinka käydä nukkumaan",
         "Organizer": "Miska Hannunkivi",
         "StartTime":  "2020-06-24T21:00:00",
         "EndTime": "2020-06-24T22:00:00",

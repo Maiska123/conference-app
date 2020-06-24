@@ -162,9 +162,9 @@ table {
 
 .viiva{
   position: absolute;
-    z-index: 505;
-    border-top: #fc0 solid 2px;
-    left: 0;
-    right: 0;
-    pointer-events: none;
+  z-index: 505;
+  border-top: #fc0 solid 2px;
+  left: 0;
+  right: 0;
+  pointer-events: none;
 }

@@ -2,9 +2,26 @@
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 9.1.8.
 
-## Development server
+its' good to have 
+`Typescript and Angular` globally installed to dev
+`npm install -g typescript`
+`npm install -g @angular/cli`
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+for development used libraries
+`npm install --save @angular/cdk`
+`npm install --save @angular/material`
+`npm install --save @angular/animations`
+
+run 
+`npm install`
+to init this projekt
+
+
+## Development server - TESTING LOCALLY!
+
+go to `cd .\conference-app\` and then
+
+Run `ng serve --disable-host-check --open` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
 
 ## Code scaffolding
 

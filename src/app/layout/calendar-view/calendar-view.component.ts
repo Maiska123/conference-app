@@ -7,6 +7,7 @@ import { trigger, state, style, transition, animate } from '@angular/animations'
 import { MatSidenav } from '@angular/material/sidenav';
 import { SidenavService } from '../../services/sidenav-details.service';
 import { TimeTile } from '../../interfaces/timeTiles.interface';
+import { RoomData } from '../../interfaces/room-data.interface';
 
 @Component({
   selector: 'app-calendar-view',
@@ -43,6 +44,8 @@ export class CalendarViewComponent implements OnInit, OnDestroy, OnChanges, Afte
 
   private clockSubscription: Subscription;
   public time: Date;
+  public conferenceRoomData: RoomData;
+  public roomDataSubscription: Subscription;
   public meetings: Meeting[];
   public meetingSubscription: Subscription;
   public showDetails = false;
@@ -105,9 +108,7 @@ export class CalendarViewComponent implements OnInit, OnDestroy, OnChanges, Afte
   onResize(event) {
     console.log(event.target.innerWidth);
     this.widthOfClocks = this.myAnotherDiv.nativeElement.offsetWidth + 12;
-    console.log(this.widthOfClocks);
     this.widthFromLeft = this.widthOfClocks + 'px';
-    console.log(this.widthFromLeft);
   }
 
   animate() {
@@ -122,6 +123,10 @@ export class CalendarViewComponent implements OnInit, OnDestroy, OnChanges, Afte
   ngOnInit() {
     this.meetingSubscription = this.meetingsService.getMeetings().subscribe(currentMeetings => {
       this.meetings = currentMeetings;
+    });
+
+    this.roomDataSubscription = this.meetingsService.getConferenceRoomName().subscribe(roomdata => {
+      this.conferenceRoomData = roomdata;
     });
 
     this.clockSubscription = this.clockService.getTime()

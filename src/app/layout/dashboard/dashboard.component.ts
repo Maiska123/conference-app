@@ -15,11 +15,11 @@ export class DashboardComponent implements OnInit, OnDestroy{
 
   /* TO OUT */
   meeting: Meeting;
-  meetingReload: boolean;
+  meetingReload = false;
   timeOut: Date;
   meetingsData: Meeting[];
 
-  currentMeeting: number;
+  currentMeeting = 1;
   receivedChildMessage: boolean;
 
   private clockSubscription: Subscription;
@@ -60,11 +60,14 @@ export class DashboardComponent implements OnInit, OnDestroy{
 
       this.meetingReload = this.receivedChildMessage;
 
-    } else { this.meetingReload = event;
-             this.currentMeeting = --this.currentMeeting;
-             this.meeting = this?.allMeetings[this?.currentMeeting];
+    }
+    else { if ( this.allMeetings !== undefined){
+                this.meetingReload = event;
+                this.currentMeeting = --this.currentMeeting;
+                this.meeting = this.allMeetings[this.currentMeeting];
 
-             this.allMeetings.pop();
+                this.allMeetings.pop();
+            }
 
             }
   }
