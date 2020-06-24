@@ -4,7 +4,6 @@
   <div class="center">
 
     <ng-template ngFor let-item [ngForOf]="meetingData" let-i="index" [ngForTrackBy]="trackByFn">
-<!-- *ngFor="let meeting of meetingData"  -->
       <mat-card class="meetingInFooter" [@flyInOut]="showMeeting ? 'open' : 'closed'" >
         <mat-card-title class="clock">
           {{ meetingData[i].StartTime | date:'HH:mm'}} - {{ meetingData[i].EndTime | date:'HH:mm'}}

@@ -2,7 +2,7 @@
 
   <app-current-view class="current-meeting" [meetingReload]="meetingReload" (update)="nextMeeting($event)" [meetingData]="meeting" [TimeIn]="timeOut"></app-current-view>
 
-  <app-calendar-view class="navbar" [TimeIn]="timeOut" ></app-calendar-view> <!-- [meetingData]="meetingsData"  -->
+  <app-calendar-view class="navbar" [TimeIn]="timeOut" ></app-calendar-view>
 
   <app-footer-view class="footer" [showMeeting]="meetingReload" [meetingData]="allMeetings" [TimeIn]="timeOut"></app-footer-view>
 

@@ -7,6 +7,12 @@ app-details-view{
   z-index: 10;
 }
 
+@media only screen and (max-width: 1000px) {
+  :host{
+    font-size: x-small;
+    font-weight: 600;
+  }
+}
 
 .roomdata{
   z-index: 1;
@@ -78,7 +84,6 @@ table {
 .clockan{
   position: relative;
   padding: 1em;
-  background-color: white;
   padding-left: 1em;
   font-weight: 700;
   font-size: small;
@@ -119,13 +124,12 @@ table {
   color: black;
   overflow: hidden;
   font-family: Lato;
-  /* // margin-top: 200px; */
   max-width: 24vw;
   width: -webkit-fill-available;
   border-left-width: 1vw;
   border-left-color: yellow;
   border-left-style: solid;
-  box-shadow: 13px 3px 20px 0px rgba(0,0,0,0.2);
+  box-shadow: 9px 4px 7px 0px rgba(0,0,0,0.2);
   background-color: white;
   padding: 0 !important;
 }

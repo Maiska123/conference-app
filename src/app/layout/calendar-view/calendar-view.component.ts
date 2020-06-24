@@ -35,13 +35,10 @@ import { TimeTile } from '../../interfaces/timeTiles.interface';
 
 export class CalendarViewComponent implements OnInit, OnDestroy, OnChanges, AfterViewInit{
 
-
-
   constructor(private meetingsService: MeetingsService,
               private clockService: ClockService,
               private sidenavService: SidenavService) { }
 
-  // @Input() meetingData: Meeting[];
   @Input() TimeIn: Date;
 
   private clockSubscription: Subscription;
@@ -62,40 +59,6 @@ export class CalendarViewComponent implements OnInit, OnDestroy, OnChanges, Afte
   fontSizeBig = 19;
   public meetingsBehaviour = new BehaviorSubject<Meeting>(null);
 
-  @ViewChild('myDiv', {read: ElementRef, static: false}) myDiv: ElementRef;
-  @ViewChild('myAnotherDiv', {read: ElementRef, static: false}) myAnotherDiv: ElementRef;
-  @ViewChild('slide', {read: ElementRef, static: false}) slides: ElementRef;
-  heightOfTimetable: any;
-  widthOfClocks: any;
-  contentHeight: string;
-  contentHeightNumber = 2544;
-  widthFromLeft = '0px';
-  scrollToViewCount = 0;
-
-  // this is obsolete
-  displayedColumns: string[] = ['subject', 'organizer', 'weight', 'symbol'];
-
-  // this is obsolete
-  stylesObjOld = {
-    cursor: 'pointer',
-    position: 'absolute',
-    'font-size': '1.1em',
-    color: 'black',
-    overflow: 'hidden',
-    'font-family': 'Lato',
-    // 'margin-top': '200px',
-    'max-width': '20vw',
-    width: '-webkit-fill-available',
-    'border-left-width': '1vw',
-    'border-left-color': 'yellow',
-    'border-left-style': 'solid',
-    'box-shadow': '3px 6px 20px 0px rgba(0,0,0,0.2)',
-    'background-color': 'white',
-    padding: '1vw',
-  };
-
-
-  // 1 hour is 100px height => 1min = 1.66px, 1s = 0.0277px ^ actually 106px
   timeTiles: TimeTile[] = [
     {text: '00:00', cols: 1, rows: 1},
     {text: '01:00', cols: 1, rows: 1},
@@ -123,6 +86,16 @@ export class CalendarViewComponent implements OnInit, OnDestroy, OnChanges, Afte
     {text: '23:00', cols: 1, rows: 1},
   ];
 
+  @ViewChild('myDiv', {read: ElementRef, static: false}) myDiv: ElementRef;
+  @ViewChild('myAnotherDiv', {read: ElementRef, static: false}) myAnotherDiv: ElementRef;
+  @ViewChild('slide', {read: ElementRef, static: false}) slides: ElementRef;
+  heightOfTimetable: any;
+  widthOfClocks: any;
+  contentHeight: string;
+  contentHeightNumber = 2544;
+  widthFromLeft = '0px';
+  scrollToViewCount = 0;
+
   @HostListener('scroll', ['$event']) // for window scroll events
   onScroll($event){
     this.scrollToViewCount = 0;
@@ -135,7 +108,6 @@ export class CalendarViewComponent implements OnInit, OnDestroy, OnChanges, Afte
     console.log(this.widthOfClocks);
     this.widthFromLeft = this.widthOfClocks + 'px';
     console.log(this.widthFromLeft);
-
   }
 
   animate() {
@@ -160,21 +132,16 @@ export class CalendarViewComponent implements OnInit, OnDestroy, OnChanges, Afte
         this.animate();
         this.scrollToViewCount = 0;
       }
-      // running time is the amount of pixels from the top of the timetable, getTime() gives UTC seconds from 1970...
       this.runningTime = Math.round((((time.getTime()  / 1000) ) % this.secondsPerDay)
                                     * ((this.heightOfTimetable) / this.secondsPerDay))
                                     + 306 + 'px' ;
-
     });
 
   }
 
   ngAfterViewInit(){
-    // console.log('divheight: ' + this.myDiv.nativeElement.offsetHeight); // <-- WORKS!
     this.heightOfTimetable = this.myDiv.nativeElement.offsetHeight;
     this.widthOfClocks = this.myAnotherDiv.nativeElement.offsetWidth + 12;
-    // console.log('width : ' + this.widthOfClocks);
-    // console.log('height : ' + this. heightOfTimetable);
     this.widthFromLeft = this.getClockWidth() + 'px';
   }
 
@@ -239,7 +206,6 @@ export class CalendarViewComponent implements OnInit, OnDestroy, OnChanges, Afte
     this.toggleRightSidenav();
     this.showDetails = true;
   }
-
 
   showDetailsBehaviour(meeting: Meeting){
     this.showDetails = true;
