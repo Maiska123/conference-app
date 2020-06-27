@@ -3,6 +3,7 @@
 
   <div class="center">
 
+    <!-- OSA ON NULLEJA!  -->
     <ng-template ngFor let-item [ngForOf]="meetingData" let-i="index" [ngForTrackBy]="trackByFn">
       <mat-card class="meetingInFooter" [@flyInOut]="showMeeting ? 'open' : 'closed'" >
         <mat-card-title class="clock">

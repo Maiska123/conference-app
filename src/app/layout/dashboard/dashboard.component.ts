@@ -23,32 +23,20 @@ export class DashboardComponent implements OnInit, OnDestroy{
   receivedChildMessage: boolean;
 
   private clockSubscription: Subscription;
-  private meetingSubscription: Subscription;
 
   allMeetings: Meeting[];
   public meetingInProgress = false;
 
-  constructor(private meetingsService: MeetingsService,
-              private clockService: ClockService) { }
+  constructor(private clockService: ClockService) { }
 
   ngOnInit() {
-    this.meetingSubscription = this.meetingsService.getMeetings().subscribe(currentMeetings => {
-      this.allMeetings = currentMeetings.reverse();
-      this.meetingsData = currentMeetings;
-      this.currentMeeting = currentMeetings.length;
-      this.meeting = currentMeetings[0];
-      console.log(currentMeetings);
-      console.log(this.meeting);
-      console.log(this.currentMeeting);
-    });
-
     this.clockSubscription = this.clockService.getTime().subscribe(time => {
       this.timeOut = time;
     });
   }
 
   ngOnDestroy(): void {
-    this.meetingSubscription.unsubscribe();
+    this.clockSubscription.unsubscribe();
   }
 
   nextMeeting(event: boolean) {
@@ -61,15 +49,17 @@ export class DashboardComponent implements OnInit, OnDestroy{
       this.meetingReload = this.receivedChildMessage;
 
     }
-    else { if ( this.allMeetings !== undefined){
-                this.meetingReload = event;
-                this.currentMeeting = --this.currentMeeting;
-                this.meeting = this.allMeetings[this.currentMeeting];
+    else {
 
-                this.allMeetings.pop();
-            }
+      if ( this.allMeetings !== undefined)
+      {
+          this.meetingReload = event;
+          this.currentMeeting = --this.currentMeeting;
+          this.meeting = this.allMeetings[this.currentMeeting];
+          this.allMeetings.pop();
+      }
 
-            }
+    }
   }
 
 }

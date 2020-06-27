@@ -51,10 +51,10 @@
   align-self: center;
 }
 
-@media only screen and (max-width: 1360px) {
+@media only screen and (max-width: 1420px) {
   .meeting-subject{
     color: black;
-    font-size: x-large;
+    font-size: large;
     align-self: center;
     position: relative;
     margin-left: 0;

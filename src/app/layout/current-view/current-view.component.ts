@@ -27,10 +27,6 @@ import { ShowOnDirtyErrorStateMatcher } from '@angular/material/core';
       transition('* => open', [
         animate('0.5s ease-out')
       ]),
-      // transition('open <=> closed', [
-      //   animate('0.5s')
-      // ]),
-
     ]),
     trigger('flyInOut', [
       state('open', style({
@@ -47,8 +43,8 @@ import { ShowOnDirtyErrorStateMatcher } from '@angular/material/core';
 })
 export class CurrentViewComponent implements OnInit, OnDestroy, OnChanges {
 
-  @Input() meetingData: Meeting;
-  @Input() meetingReload: boolean;
+  // @Input() meetingData: Meeting;
+  // @Input() meetingReload: boolean;
   @Input() TimeIn: Date;
 
   // tslint:disable-next-line: no-output-rename
@@ -60,8 +56,10 @@ export class CurrentViewComponent implements OnInit, OnDestroy, OnChanges {
   public meetings: Meeting[];
   public timerWidth;
   public timeLeft = 280;
+  public indicatorLength = 450;
   public interval;
   public showMeeting = true;
+  public currentMeetingInProgress: Meeting;
   private clockSubscription: Subscription;
   private meetingSubscription: Subscription;
 
@@ -70,59 +68,54 @@ export class CurrentViewComponent implements OnInit, OnDestroy, OnChanges {
   }
 
   ngOnInit(): void {
-
-  //     this.meetingSubscription = this.meetingsService.getMeetings().subscribe(currentMeetings => {
-  //       this.meetings = currentMeetings.reverse();
-  //     });
-
+    this.meetingSubscription = this.meetingsService.getMeetings().subscribe(currentMeetings => {
+      this.meetings = currentMeetings;
+      this.currentMeetingInProgress = currentMeetings[0];
+    });
   }
 
   ngOnChanges() {
-    this.showMeeting = this.meetingReload;
     this.updateTimeLeft();
   }
 
   ngOnDestroy(): void {
-
+    this.meetingSubscription.unsubscribe();
   }
 
   toggle(showMeet: boolean): void {
-
     (this.showMeeting) ?  this.showMeeting = showMeet : this.showMeeting = showMeet;
   }
 
   updateTimeLeft(){
-
-    const end = new Date(this.meetingData?.EndTime).valueOf();
-    const start = new Date(this.meetingData?.StartTime).valueOf();
+    const end = new Date(this.currentMeetingInProgress?.EndTime).valueOf();
+    const start = new Date(this.currentMeetingInProgress?.StartTime).valueOf();
     const current = new Date(this.TimeIn).valueOf();
 
-    if (current > start  && current < end){
-      this.showMeeting = true;
-      const timePassed = ((1 - (current - start ) / (end - start )) * (280));
-      this.timeLeft = 280 - timePassed;
+    // IF current meeting is active
+    if ( current > start  && current < end ){
+    this.showMeeting = true;
 
-    } else { this.timeLeft = 280;
-             this.showMeeting = false;
-             this.nextMeeting.emit(this.showMeeting);
+    // Yellow indicator math
+    const timePassed = ((1 - (current - start ) / (end - start )) * (this.indicatorLength));
+    this.timeLeft = this.indicatorLength - timePassed;
+
+    } else {
+      if ( this.meetings !== undefined)
+      {
+        this.meetings.forEach(meeting => {
+            const endNext = new Date(meeting?.EndTime).valueOf();
+            const startNext = new Date(meeting?.StartTime).valueOf();
+            const currentNext = new Date(this.TimeIn).valueOf();
+            if ( currentNext > startNext  && currentNext < endNext ){
+              this.currentMeetingInProgress = meeting;
+              this.showMeeting = true;
             }
+        });
+      }
+      this.showMeeting = false;
+      this.timeLeft = this.indicatorLength;
+      // this.nextMeeting.emit(this.showMeeting);
+    }
   }
-
-// startTimer() {
-//     this.interval = setInterval(() => {
-//       if (this.timeLeft < 280) {
-//         this.timeLeft++;
-//       } else {
-//         console.log(this.now);
-//         this.pauseTimer();
-//         this.toggle();
-//         this.timeLeft = 0;
-//       }
-//     }, 10 );
-//   }
-
-//   pauseTimer() {
-//     clearInterval(this.interval);
-//   }
 
 }

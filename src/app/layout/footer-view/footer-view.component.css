@@ -23,6 +23,19 @@
 
 }
 
+@media only screen and (max-width: 1400px) {
+
+  .meetingInFooter{
+    color: rgb(255, 255, 255);
+    min-width: 18vw;
+    max-width: 30vw;
+    height: max-content;
+  }
+
+}
+
+
+
 .clock{
   color: rgba(151, 151, 151, 1);
   font-size: medium;

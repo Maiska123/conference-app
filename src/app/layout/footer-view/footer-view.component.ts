@@ -1,7 +1,9 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, OnDestroy, SimpleChanges, OnChanges } from '@angular/core';
 import { Meeting } from '../../interfaces/meeting.interface';
 import { SidenavService } from '../../services/sidenav-details.service';
 import { trigger, state, style, transition, animate, stagger, query, keyframes } from '@angular/animations';
+import { MeetingsService } from '../../services/meetings.service';
+import { Subscription, VirtualTimeScheduler } from 'rxjs';
 
 @Component({
   selector: 'app-footer-view',
@@ -24,23 +26,58 @@ import { trigger, state, style, transition, animate, stagger, query, keyframes }
     ]),
   ]
 })
-export class FooterViewComponent implements OnInit {
+export class FooterViewComponent implements OnInit, OnDestroy, OnChanges {
 
-  @Input() meetingData: Meeting[];
   @Input() TimeIn: Date;
   @Input() showMeeting: boolean;
 
-  constructor(private sidenavService: SidenavService) { }
+  public meetingData: Meeting[];
+  public currentMeetingInProgress: Meeting;
+  private meetingSubscription: Subscription;
+
+  constructor(private meetingsService: MeetingsService) { }
 
   ngOnInit() {
+    this.meetingSubscription = this.meetingsService.getMeetings().subscribe(currentMeetings => {
+      this.meetingData = currentMeetings.reverse();
+      // console.log('footer meetings: ' + this.meetingData[0].Subject);
+      // console.log(this.meetingData);
+    });
   }
 
-  toggleRightSidenav() {
-    this.sidenavService.toggle();
+  ngOnChanges(changes: SimpleChanges): void {
+    this.updateMeetings();
   }
 
   trackByFn(index, item) {
     return index; // or item.id
   }
 
+  ngOnDestroy(): void {
+    this.meetingSubscription.unsubscribe();
+  }
+
+  updateMeetings(): void{
+
+    if ( this.meetingData !== undefined)
+    {
+      // täytyy poistaa listalta vielä se nykyinen näkyvissä oleva
+      this.meetingData.forEach((meeting, index) => {
+
+          const endNext = new Date(meeting?.EndTime).valueOf();
+          const startNext = new Date(meeting?.StartTime).valueOf();
+          const currentNext = new Date(this.TimeIn).valueOf();
+          if ( currentNext > endNext ){
+            this.meetingData = this.meetingData.filter((_, filterIndex) => filterIndex !== index);
+          }
+
+          if ( currentNext > startNext  && currentNext < endNext ){
+            this.meetingData = this.meetingData.filter((_, filterIndex) => filterIndex !== index);
+          }
+      });
+      // console.log('footer meetings: ' + this.meetingData[0].Subject);
+      // console.log(this.meetingData);
+      // this.nextMeeting.emit(this.showMeeting);
+    }
+  }
 }

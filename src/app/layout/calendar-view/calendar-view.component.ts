@@ -97,7 +97,8 @@ export class CalendarViewComponent implements OnInit, OnDestroy, OnChanges, Afte
   contentHeight: string;
   contentHeightNumber = 2544;
   widthFromLeft = '0px';
-  scrollToViewCount = 0;
+  scrollToViewCount = 13;
+  toggleSideNavOffCount = 0;
 
   @HostListener('scroll', ['$event']) // for window scroll events
   onScroll($event){
@@ -115,10 +116,23 @@ export class CalendarViewComponent implements OnInit, OnDestroy, OnChanges, Afte
     this.slides.nativeElement.scrollIntoView({ behavior: 'smooth',  block: 'center' });
   }
 
-  emptyCount() {
+  emptyScrollCount() {
     this.scrollToViewCount = 0;
   }
 
+  emptySideNavCount() {
+    this.toggleSideNavOffCount = 0;
+  }
+
+  ngOnChanges() {
+
+  }
+
+  ngOnDestroy(): void {
+    this.clockSubscription.unsubscribe();
+    this.meetingSubscription.unsubscribe();
+    this.roomDataSubscription.unsubscribe();
+  }
 
   ngOnInit() {
     this.meetingSubscription = this.meetingsService.getMeetings().subscribe(currentMeetings => {
@@ -132,14 +146,28 @@ export class CalendarViewComponent implements OnInit, OnDestroy, OnChanges, Afte
     this.clockSubscription = this.clockService.getTime()
     .subscribe(time => {
       this.time = time;
+
+      // Timers on page
       ++this.scrollToViewCount;
-      if (this.scrollToViewCount > 15 ){
+      ++this.toggleSideNavOffCount;
+
+      if ( this.scrollToViewCount > 15 ){
         this.animate();
-        this.scrollToViewCount = 0;
+        this.emptyScrollCount();
       }
-      this.runningTime = Math.round((((time.getTime()  / 1000) ) % this.secondsPerDay)
-                                    * ((this.heightOfTimetable) / this.secondsPerDay))
-                                    + 306 + 'px' ;
+
+      if ( this.toggleSideNavOffCount > 30 && this.sidenavService.isOpen() ){
+        this.sidenavService.toggle();
+        this.emptySideNavCount();
+      } else if ( this.toggleSideNavOffCount > 120 ){
+        this.emptySideNavCount();
+      }
+
+      // For displaying current time with a pin
+      this.runningTime = Math.round(
+        (((time.getTime()  / 1000) ) % this.secondsPerDay)
+        * ((this.heightOfTimetable) / this.secondsPerDay))
+        + 301 + 'px' ;
     });
 
   }
@@ -189,14 +217,6 @@ export class CalendarViewComponent implements OnInit, OnDestroy, OnChanges, Afte
 
   getClockWidth(){
     return this.widthOfClocks;
-  }
-
-  ngOnChanges() {
-
-  }
-
-  ngOnDestroy(): void {
-    this.clockSubscription.unsubscribe();
   }
 
   toggleRightSidenav() {

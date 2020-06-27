@@ -7,7 +7,7 @@ app-details-view{
   z-index: 10;
 }
 
-@media only screen and (max-width: 1000px) {
+@media only screen and (max-width: 1100px) {
   :host{
     font-size: x-small;
     font-weight: 600;
@@ -23,9 +23,17 @@ app-details-view{
   width: inherit;
   top: 0;
   margin-left: 2vw;
-  height: 12vh;
+  max-height: 20vh;
   box-shadow: 0 0 30px 20px white;
   overflow: hidden;
+}
+
+.roomname{
+  display:flex;
+  flex-wrap: wrap;
+  margin-bottom: 0.5vh;
+  font-weight:500;
+  color:rgba(134, 134, 134,0.8)
 }
 
 .background-block{
@@ -90,6 +98,18 @@ table {
   top: -50px ;
 }
 
+@media only screen and (max-width: 720px) {
+  .clockan{
+    position: relative;
+    padding: 1em;
+    padding-left: 1em;
+    font-weight: 600;
+    font-size: x-small;
+    top: -50px ;
+    left: 0.27vw;
+  }
+}
+
 .clocks-n-sandals{
   padding-top: 20px;
   display: flex;
@@ -135,7 +155,7 @@ table {
 }
 
 .card-title{
-  font-weight: 900;
+  font-weight: 700;
   margin-top:0.5vw !important;
   margin-left:0.5vw;
 }
@@ -143,7 +163,7 @@ table {
 .card-subtitle{
   font-weight: 700;
   margin-left: 0.5vw;
-  font-size: x-small;
+  font-size: small;
   color: rgba(0, 0, 0, 0.3);
 }
 
