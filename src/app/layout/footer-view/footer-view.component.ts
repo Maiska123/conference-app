@@ -40,8 +40,6 @@ export class FooterViewComponent implements OnInit, OnDestroy, OnChanges {
   ngOnInit() {
     this.meetingSubscription = this.meetingsService.getMeetings().subscribe(currentMeetings => {
       this.meetingData = currentMeetings.reverse();
-      // console.log('footer meetings: ' + this.meetingData[0].Subject);
-      // console.log(this.meetingData);
     });
   }
 
@@ -61,7 +59,6 @@ export class FooterViewComponent implements OnInit, OnDestroy, OnChanges {
 
     if ( this.meetingData !== undefined)
     {
-      // täytyy poistaa listalta vielä se nykyinen näkyvissä oleva
       this.meetingData.forEach((meeting, index) => {
 
           const endNext = new Date(meeting?.EndTime).valueOf();
@@ -75,9 +72,6 @@ export class FooterViewComponent implements OnInit, OnDestroy, OnChanges {
             this.meetingData = this.meetingData.filter((_, filterIndex) => filterIndex !== index);
           }
       });
-      // console.log('footer meetings: ' + this.meetingData[0].Subject);
-      // console.log(this.meetingData);
-      // this.nextMeeting.emit(this.showMeeting);
     }
   }
 }
