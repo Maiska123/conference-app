@@ -1,3 +1,4 @@
+import { Participant } from './../interfaces/participant.interface';
 import { Injectable, EventEmitter } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 
@@ -28,9 +29,21 @@ export class MeetingsService {
 
     return this.http.get<Meeting[]>(this.meetingsBaseURL + roomId)
     .pipe(
+      tap(meetings => meetings.forEach(meeting => {
+        this.getParticipants(meeting);
+      })),
       tap(_ => console.log('fetched meetings')),
       catchError(this.handleError<Meeting[]>('getMeeting', []))
     );
+  }
+
+  getParticipants(meeting: Meeting){
+
+    return this.http.get<Participant[]>(this.meetingsBaseURL + meeting.event_id + '/participants')
+    .subscribe(Participants => {
+      console.log('fetched participants for event ' + meeting.event_id);
+      meeting.Participants = Participants;
+    });
   }
 
   getRoomName(roomId: number): Observable<RoomData>  {
