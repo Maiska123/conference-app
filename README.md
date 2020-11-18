@@ -1,5 +1,31 @@
 # ConferenceApp
 
+![Day View Demo](demo/demo.gif)
+
+
+## !! Huomioita työssä !!
+
+1. kesä ja talviaikakäsittely hardcoodattua - 3600 sekuntia missä käytetäänkään
+
+2. tapahtumien päivitys ei tapahdu ellei näkymä refreshaa ( tähän käsittelyyn pitäisi tehdä vakiopolleri frontendiin, joko  pollataan tapahtumanmuutos bittiä tai kokonaan aina uutta meetings arrayta)
+
+3. testiä varten hypätään http://localhost:4200/dashboard/{roomId}
+
+4. RoomId voi olla 1 - (kuinka monelle huoneelle on dataa kannassa...)
+
+5. Kellonaika on synkronoitu kaikkien näkymäosien kanssa time servicellä
+
+6. tapahtumat eivät ole vielä synkronoitu koska tämä aiempi käsittely niiden päivittämiselle on 404
+
+7. jos tapahtumia on, niin vähimmäisvaatimus on 
+	* otsikko ja 
+	* järjestäjä sekä 
+	* alku että päättymisaika
+
+8. huoneella täytyy olla 
+	* nimi
+
+
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 9.1.8.
 
 its' good to have 

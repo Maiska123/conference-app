@@ -12,8 +12,9 @@ import { RoomData } from '../interfaces/room-data.interface';
 })
 export class MeetingsService {
 
-  private meetingsUrl = './assets/meetings.json';  // URL to web api
-  private conferenceRoomUrl = './assets/conference-room.json';
+  private meetingsBaseURL = 'http://127.0.0.1:8080/api/events/';  // URL to web api
+  // private meetingsUrl = './assets/meetings.json';  // URL to web api
+  private conferenceRoomBaseURL = 'http://127.0.0.1:8080/api/rooms/';
 
   httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -23,28 +24,30 @@ export class MeetingsService {
     private http: HttpClient) {}
 
       /** GET meetings from the "server" */
-  getMeetings(): Observable<Meeting[]> {
-    return this.http.get<Meeting[]>(this.meetingsUrl)
+  getMeetings(roomId: number): Observable<Meeting[]> {
+
+    return this.http.get<Meeting[]>(this.meetingsBaseURL + roomId)
     .pipe(
       tap(_ => console.log('fetched meetings')),
       catchError(this.handleError<Meeting[]>('getMeeting', []))
     );
   }
 
-  getRoomName(): Observable<RoomData>  {
-    return this.http.get<RoomData>(this.conferenceRoomUrl)
+  getRoomName(roomId: number): Observable<RoomData>  {
+
+    return this.http.get<RoomData>(this.conferenceRoomBaseURL + roomId)
     .pipe(
-      tap(_ => console.log('fetched meetings')),
+      tap(_ => console.log('fetched RoomData')),
       catchError(this.handleError<RoomData>('getRoomData'))
     );
   }
 
-  getMeeting(){
-    return this.getMeetings();
+  getMeeting(roomId: number){
+    return this.getMeetings(roomId);
   }
 
-  getConferenceRoomName(){
-    return this.getRoomName();
+  getConferenceRoomName(roomId: number){
+    return this.getRoomName(roomId);
   }
 
 

@@ -19,13 +19,13 @@ export class AppComponent implements OnInit {
               private sidenavService: SidenavService) {}
   public meetings: Meeting[];
 
-  getMeetings(): void {
-    this.meetingsService.getMeetings()
-    .subscribe(newMeetings => this.meetings = newMeetings);
-  }
+  // getMeetings(): void {
+  //   this.meetingsService.getMeetings()
+  //   .subscribe(newMeetings => this.meetings = newMeetings);
+  // }
 
   ngOnInit() {
-    this.getMeetings();
+    // this.getMeetings();
   }
 
 

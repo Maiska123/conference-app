@@ -3,7 +3,8 @@ import { Meeting } from '../../interfaces/meeting.interface';
 import { SidenavService } from '../../services/sidenav-details.service';
 import { trigger, state, style, transition, animate, stagger, query, keyframes } from '@angular/animations';
 import { MeetingsService } from '../../services/meetings.service';
-import { Subscription, VirtualTimeScheduler } from 'rxjs';
+import { Subscription, timer, VirtualTimeScheduler } from 'rxjs';
+import { switchMap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-footer-view',
@@ -29,6 +30,7 @@ import { Subscription, VirtualTimeScheduler } from 'rxjs';
 export class FooterViewComponent implements OnInit, OnDestroy, OnChanges {
 
   @Input() TimeIn: Date;
+  @Input() roomIdIn: number;
   @Input() showMeeting: boolean;
 
   public meetingData: Meeting[];
@@ -37,12 +39,23 @@ export class FooterViewComponent implements OnInit, OnDestroy, OnChanges {
 
   constructor(private meetingsService: MeetingsService) { }
 
+  // Jos halutaan ajastettua tietojenhakua
+  //
+  // ngOnInit() {
+  //   this.meetingSubscription = timer(0, 10000).pipe(
+  //     switchMap(() => this.meetingsService.getMeetings(this.roomIdIn))
+  //   )
+  //   .subscribe(currentMeetings => {
+  //     this.meetingData = currentMeetings.reverse();
+  //   });
+  // }
+
   ngOnInit() {
-    this.meetingSubscription = this.meetingsService.getMeetings().subscribe(currentMeetings => {
+    this.meetingSubscription = this.meetingsService.getMeetings(this.roomIdIn)
+    .subscribe(currentMeetings => {
       this.meetingData = currentMeetings.reverse();
     });
   }
-
   ngOnChanges(changes: SimpleChanges): void {
     this.updateMeetings();
   }

@@ -14,6 +14,8 @@ import { DetailsViewComponent } from './layout/details-view/details-view.compone
 import { SidenavService } from './services/sidenav-details.service';
 import { MeetingsService } from './services/meetings.service';
 import { ClockService } from './services/clock.service';
+import { ServiceWorkerModule } from '@angular/service-worker';
+import { environment } from '../environments/environment';
 
 
 @NgModule({
@@ -26,11 +28,12 @@ import { ClockService } from './services/clock.service';
     FooterViewComponent
   ],
   imports: [
-    BrowserModule,
+    BrowserModule.withServerTransition({ appId: 'serverApp' }),
     AppRoutingModule,
     HttpClientModule,
     MaterialModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production })
   ],
   providers: [SidenavService,
               ClockService,

@@ -4,7 +4,7 @@ import { Subscription } from 'rxjs';
 import { MeetingsService } from '../../services/meetings.service';
 import { SidenavService } from '../../services/sidenav-details.service';
 import { ClockService } from '../../services/clock.service';
-
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-dashboard',
@@ -13,10 +13,15 @@ import { ClockService } from '../../services/clock.service';
 })
 export class DashboardComponent implements OnInit, OnDestroy{
 
+  /* URL PARAMS */
+  roomId: number;
+  private roomIdSub: any;
+
   /* TO OUT */
   meeting: Meeting;
   meetingReload = false;
   timeOut: Date;
+  roomIdOut: number;
   meetingsData: Meeting[];
 
   currentMeeting = 1;
@@ -27,16 +32,22 @@ export class DashboardComponent implements OnInit, OnDestroy{
   allMeetings: Meeting[];
   public meetingInProgress = false;
 
-  constructor(private clockService: ClockService) { }
+  constructor(private clockService: ClockService,
+              private route: ActivatedRoute) { }
 
   ngOnInit() {
     this.clockSubscription = this.clockService.getTime().subscribe(time => {
       this.timeOut = time;
     });
+
+    this.roomIdSub = this.route.params.subscribe(params => {
+      this.roomIdOut = params.roomId; // string 'roomId' to a number
+    });
   }
 
   ngOnDestroy(): void {
     this.clockSubscription.unsubscribe();
+    this.roomIdSub.unsubscribe();
   }
 
   nextMeeting(event: boolean) {

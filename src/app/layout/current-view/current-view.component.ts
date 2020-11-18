@@ -46,6 +46,8 @@ export class CurrentViewComponent implements OnInit, OnDestroy, OnChanges {
   // @Input() meetingData: Meeting;
   // @Input() meetingReload: boolean;
   @Input() TimeIn: Date;
+  @Input() roomIdIn: number;
+
 
   // tslint:disable-next-line: no-output-rename
   @Output('update') public nextMeeting: EventEmitter<boolean> = new EventEmitter<boolean>();
@@ -68,7 +70,7 @@ export class CurrentViewComponent implements OnInit, OnDestroy, OnChanges {
   }
 
   ngOnInit(): void {
-    this.meetingSubscription = this.meetingsService.getMeetings().subscribe(currentMeetings => {
+    this.meetingSubscription = this.meetingsService.getMeetings(this.roomIdIn).subscribe(currentMeetings => {
       this.meetings = currentMeetings;
       this.currentMeetingInProgress = currentMeetings[0];
     });

@@ -3,8 +3,8 @@
     {
         "Subject": "Erilaisuus etätöissä -webinaarit",
         "Organizer": "Paavo Kaurismäki",
-        "StartTime":  "2020-06-27T08:00:00",
-        "EndTime":  "2020-06-27T09:00:00",
+        "StartTime":  "2020-08-16T08:00:00",
+        "EndTime":  "2020-08-16T09:00:00",
         "Participants": [
             {
                 "Name": "Miska Hannunkivi",
@@ -24,8 +24,8 @@
     {
         "Subject": "Virtuaalivalmennukset tiimeille ja johtajille",
         "Organizer": "Mervi Uusitalo",
-        "StartTime":  "2020-06-27T09:30:00",
-        "EndTime":  "2020-06-27T11:00:00",
+        "StartTime":  "2020-08-16T09:30:00",
+        "EndTime":  "2020-08-16T11:00:00",
         "Participants": [
             {
                 "Name": "Miska Hannunkivi",
@@ -65,8 +65,8 @@
     {
         "Subject": "Avoimet webinaarit: muutos, etätyö, johtaminen ja stressinhallinta",
         "Organizer": "Kalle Koivunen",
-        "StartTime":  "2020-06-27T12:30:00",
-        "EndTime":  "2020-06-27T13:09:00",
+        "StartTime":  "2020-08-16T20:29:00",
+        "EndTime":  "2020-08-16T20:59:00",
         "Participants": [
             {
                 "Name": "Miska Hannunkivi",
@@ -86,8 +86,8 @@
     {
         "Subject": "Brainstormataan ideoita",
         "Organizer": "Miska Hannunkivi",
-        "StartTime":  "2020-06-27T13:09:00",
-        "EndTime":  "2020-06-27T15:00:00",
+        "StartTime":  "2020-08-16T13:09:00",
+        "EndTime":  "2020-08-16T15:00:00",
         "Participants": [
             {
                 "Name": "Kaikki",
@@ -99,8 +99,8 @@
     {
         "Subject": "Kuinka käydä nukkumaan",
         "Organizer": "Miska Hannunkivi",
-        "StartTime":  "2020-06-27T21:00:00",
-        "EndTime": "2020-06-27T23:59:00",
+        "StartTime":  "2020-08-16T21:00:00",
+        "EndTime": "2020-08-16T23:59:00",
         "Participants": null,
         "Description": null
     }

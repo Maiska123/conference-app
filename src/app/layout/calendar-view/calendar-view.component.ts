@@ -41,6 +41,7 @@ export class CalendarViewComponent implements OnInit, OnDestroy, OnChanges, Afte
               private sidenavService: SidenavService) { }
 
   @Input() TimeIn: Date;
+  @Input() roomIdIn: number;
 
   private clockSubscription: Subscription;
   public time: Date;
@@ -55,7 +56,10 @@ export class CalendarViewComponent implements OnInit, OnDestroy, OnChanges, Afte
   public meetingFromTop = '0px';
 
   secondsPerDay = 86400;
+  // if 	29.03. 03:00 - kesäaika -	25.10 04:00
   threeHoursInSeconds = (3 * 3600);
+
+  // threeHoursInSeconds = (2 * 3600);
   public meetingClicked: Meeting;
 
   fontSizeTiny = 15;
@@ -113,7 +117,10 @@ export class CalendarViewComponent implements OnInit, OnDestroy, OnChanges, Afte
   }
 
   animate() {
+    // window.HTMLElement.prototype.scrollIntoView = () => {};
     this.slides.nativeElement.scrollIntoView({ behavior: 'smooth',  block: 'center' });
+    // (this.slides.nativeElement as HTMLElement).scrollIntoView({ behavior: 'smooth',  block: 'center' });
+    // console.log('should now scrollIntoView');
   }
 
   emptyScrollCount() {
@@ -135,12 +142,12 @@ export class CalendarViewComponent implements OnInit, OnDestroy, OnChanges, Afte
   }
 
   ngOnInit() {
-    this.meetingSubscription = this.meetingsService.getMeetings().subscribe(currentMeetings => {
+    this.meetingSubscription = this.meetingsService.getMeetings(this.roomIdIn).subscribe(currentMeetings => {
       this.meetings = currentMeetings;
     });
 
-    this.roomDataSubscription = this.meetingsService.getConferenceRoomName().subscribe(roomdata => {
-      this.conferenceRoomData = roomdata;
+    this.roomDataSubscription = this.meetingsService.getConferenceRoomName(this.roomIdIn).subscribe(roomdata => {
+      this.conferenceRoomData = roomdata[0]; // backend serves object array
     });
 
     this.clockSubscription = this.clockService.getTime()
@@ -165,7 +172,8 @@ export class CalendarViewComponent implements OnInit, OnDestroy, OnChanges, Afte
 
       // For displaying current time with a pin
       this.runningTime = Math.round(
-        (((time.getTime()  / 1000) ) % this.secondsPerDay)
+        // kesä ja talviaikarunkkausta, sentakia nyt - 3600 sekuntia
+        ((((time.getTime()  / 1000) - 3600) ) % this.secondsPerDay)
         * ((this.heightOfTimetable) / this.secondsPerDay))
         + 301 + 'px' ;
     });
@@ -182,8 +190,8 @@ export class CalendarViewComponent implements OnInit, OnDestroy, OnChanges, Afte
   getplacement(meeting){
     let top = '0px';
     const meetingDateTime = new Date(meeting.StartTime);
-
-    top = Math.round(Math.round((((meetingDateTime.getTime() / 1000) + this.threeHoursInSeconds) % this.secondsPerDay)
+    // kesä ja talviaikarunkkausta, sentakia nyt - 3600 sekuntia
+    top = Math.round(Math.round((((meetingDateTime.getTime() / 1000) - 3600 + this.threeHoursInSeconds) % this.secondsPerDay)
       * (this.heightOfTimetable / this.secondsPerDay)))
       + 20 + 'px';
 

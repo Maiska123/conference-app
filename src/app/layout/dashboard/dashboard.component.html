@@ -1,9 +1,9 @@
 <body>
 
-  <app-current-view class="current-meeting" (update)="nextMeeting($event)"  [TimeIn]="timeOut"></app-current-view>
+  <app-current-view class="current-meeting" (update)="nextMeeting($event)"  [TimeIn]="timeOut" [roomIdIn]="roomIdOut"></app-current-view>
   <!-- [meetingData]="meeting"  [meetingReload]="meetingReload"-->
-  <app-calendar-view class="navbar" [TimeIn]="timeOut" ></app-calendar-view>
+  <app-calendar-view class="navbar" [TimeIn]="timeOut" [roomIdIn]="roomIdOut" ></app-calendar-view>
 
-  <app-footer-view class="footer" [showMeeting]="meetingReload" [TimeIn]="timeOut"></app-footer-view>
+  <app-footer-view class="footer" [showMeeting]="meetingReload" [TimeIn]="timeOut" [roomIdIn]="roomIdOut"></app-footer-view>
 
 </body>
