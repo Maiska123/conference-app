@@ -8,7 +8,7 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
-              git clone https://github.com/Maiska123/conference-app
+              sh 'git clone https://github.com/Maiska123/conference-app'
             }
         }
         stage('Install') {
