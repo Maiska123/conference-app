@@ -1,6 +1,26 @@
-# ConferenceApp
 
-<img src="demo/demo.gif" width="750" height="550"/>
+
+
+> My friend asked me to help him on a pre-job-interview -task, and i delivered... maybe too much(?)
+
+hence why born,
+
+# ConferenceApp  <img src="demo/demo.gif" width="300" height="250"/>
+
+Angular based application to show current date meeting in a specific "room" (*repository doesn't include backend or database-schemas)
+
+| Frontend | (Used backend*) | (Used database*) | Tested On |
+|--|--|--|--|
+| ![Angular](https://img.shields.io/badge/angular-%23DD0031.svg?style=for-the-badge&logo=angular&logoColor=white) | ![NodeJS](https://img.shields.io/badge/node.js-6DA55F?style=for-the-badge&logo=node.js&logoColor=white) | ![MicrosoftSQLServer](https://img.shields.io/badge/Microsoft%20SQL%20Sever-CC2927?style=for-the-badge&logo=microsoft%20sql%20server&logoColor=white) | ![Google Chrome](https://img.shields.io/badge/Google%20Chrome-4285F4?style=for-the-badge&logo=GoogleChrome&logoColor=white) |
+
+
+![mainscreen1](demo/conference-calendar-main-screen-1.jpg)
+
+
+
+
+https://user-images.githubusercontent.com/42906162/199672322-f0c88e39-a0e5-4c64-801b-40a1f0e66a9a.mp4
+
 
 ## !! Huomioita työssä !!
 
