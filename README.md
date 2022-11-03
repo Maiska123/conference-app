@@ -1,7 +1,6 @@
 # ConferenceApp
 
-![Day View Demo](demo/demo.gif)
-
+<img src="demo/demo.gif" width="750" height="550"/>
 
 ## !! Huomioita työssä !!
 
