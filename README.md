@@ -1,15 +1,15 @@
 
 
 
-> My friend asked me to help him on a pre-job-interview -task, and i delivered... maybe too much(?)
+> What if meeting rooms ("neukkarit" in short) each invidually would have current date and usage shown at the door, especially those where you can't see inside of?
 
 hence why born,
 
-# ConferenceApp  <img src="demo/demo.gif" width="300" height="250"/>
+# ConferenceApp  <img src="demo/demo.gif" width="500" height="400"/>
 
-Angular based application to show current date meeting in a specific "room" (*repository doesn't include backend or database-schemas)
+Angular, Node and SQL based application to show current date meeting in a specific "room".
 
-| Frontend | (Used backend*) | (Used database*) | Tested On |
+| Frontend | Backend | Database | Tested On |
 |--|--|--|--|
 | ![Angular](https://img.shields.io/badge/angular-%23DD0031.svg?style=for-the-badge&logo=angular&logoColor=white) | ![NodeJS](https://img.shields.io/badge/node.js-6DA55F?style=for-the-badge&logo=node.js&logoColor=white) | ![MicrosoftSQLServer](https://img.shields.io/badge/Microsoft%20SQL%20Sever-CC2927?style=for-the-badge&logo=microsoft%20sql%20server&logoColor=white) | ![Google Chrome](https://img.shields.io/badge/Google%20Chrome-4285F4?style=for-the-badge&logo=GoogleChrome&logoColor=white) |
 
@@ -22,6 +22,26 @@ Angular based application to show current date meeting in a specific "room" (*re
 https://user-images.githubusercontent.com/42906162/199672322-f0c88e39-a0e5-4c64-801b-40a1f0e66a9a.mp4
 
 
+
+## run in development mode
+* docker-compose up --build
+  * fires up the backend and frontend and database
+    * frontend is on http://localhost:8080
+    * backend is on http://localhost:3000
+    * database is on http://localhost:1433
+      * actually hardcoded to be in ip address space of docker-compose
+* go to http://localhost:8080
+* there room selection with url `/dashboard/:roomId`
+
+
+### backround
+* database filled with demodata on startup (to today)
+* with specialized scraper it would be possible to subscribe to eg. google calendar data to and add it to this 
+  * i didn't yet include post or put mechanism to backend cause thought not to do by hand
+
+
+----
+## nonsense afterwards - dont read
 ## !! Huomioita työssä !!
 
 1. kesä ja talviaikakäsittely hardcoodattua - 3600 sekuntia missä käytetäänkään
@@ -47,43 +67,3 @@ https://user-images.githubusercontent.com/42906162/199672322-f0c88e39-a0e5-4c64-
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 9.1.8.
 
-its' good to have 
-`Typescript and Angular` globally installed to dev
-`npm install -g typescript`
-`npm install -g @angular/cli`
-
-for development used libraries
-`npm install --save @angular/cdk`
-`npm install --save @angular/material`
-`npm install --save @angular/animations`
-
-run 
-`npm install`
-to init this projekt
-
-
-## Development server - TESTING LOCALLY!
-
-go to `cd .\conference-app\` and then
-
-Run `ng serve --disable-host-check --open` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
-
-## Code scaffolding
-
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
-
-## Build
-
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
-
-## Running unit tests
-
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).

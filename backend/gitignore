@@ -1,0 +1,10 @@
+node_modules
+Rooms
+meininki.md
+*.docx
+notindex.js
+notserver.js
+*.PNG
+*.py
+*.log
+app

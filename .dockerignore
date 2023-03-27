@@ -1,0 +1,6 @@
+node_modules/
+demo/
+db/
+backend/
+docker-compose.yml
+Dockerfile

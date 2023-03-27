@@ -9,60 +9,57 @@ import { Meeting } from '../interfaces/meeting.interface';
 import { RoomData } from '../interfaces/room-data.interface';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class MeetingsService {
-
-  private meetingsBaseURL = 'http://127.0.0.1:8080/api/events/';  // URL to web api
+  private meetingsBaseURL = 'http://localhost:8080/api/events/'; // URL to web api
   // private meetingsUrl = './assets/meetings.json';  // URL to web api
-  private conferenceRoomBaseURL = 'http://127.0.0.1:8080/api/rooms/';
+  private conferenceRoomBaseURL = 'http://localhost:8080/api/rooms/';
 
   httpOptions = {
-    headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+    headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
   };
 
-  constructor(
-    private http: HttpClient) {}
+  constructor(private http: HttpClient) {}
 
-      /** GET meetings from the "server" */
+  /** GET meetings from the "server" */
   getMeetings(roomId: number): Observable<Meeting[]> {
-
-    return this.http.get<Meeting[]>(this.meetingsBaseURL + roomId)
-    .pipe(
-      tap(meetings => meetings.forEach(meeting => {
-        this.getParticipants(meeting);
-      })),
-      tap(_ => console.log('fetched meetings')),
+    return this.http.get<Meeting[]>(this.meetingsBaseURL + roomId).pipe(
+      tap((meetings) =>
+        meetings.forEach((meeting) => {
+          this.getParticipants(meeting);
+        })
+      ),
+      tap((_) => console.log('fetched meetings')),
       catchError(this.handleError<Meeting[]>('getMeeting', []))
     );
   }
 
-  getParticipants(meeting: Meeting){
-
-    return this.http.get<Participant[]>(this.meetingsBaseURL + meeting.event_id + '/participants')
-    .subscribe(Participants => {
-      console.log('fetched participants for event ' + meeting.event_id);
-      meeting.Participants = Participants;
-    });
+  getParticipants(meeting: Meeting) {
+    return this.http
+      .get<Participant[]>(
+        this.meetingsBaseURL + meeting.event_id + '/participants'
+      )
+      .subscribe((Participants) => {
+        console.log('fetched participants for event ' + meeting.event_id);
+        meeting.Participants = Participants;
+      });
   }
 
-  getRoomName(roomId: number): Observable<RoomData>  {
-
-    return this.http.get<RoomData>(this.conferenceRoomBaseURL + roomId)
-    .pipe(
-      tap(_ => console.log('fetched RoomData')),
+  getRoomName(roomId: number): Observable<RoomData> {
+    return this.http.get<RoomData>(this.conferenceRoomBaseURL + roomId).pipe(
+      tap((_) => console.log('fetched RoomData')),
       catchError(this.handleError<RoomData>('getRoomData'))
     );
   }
 
-  getMeeting(roomId: number){
+  getMeeting(roomId: number) {
     return this.getMeetings(roomId);
   }
 
-  getConferenceRoomName(roomId: number){
+  getConferenceRoomName(roomId: number) {
     return this.getRoomName(roomId);
   }
-
 
   /**
    * Handle Http operation that failed.
@@ -72,7 +69,6 @@ export class MeetingsService {
    */
   private handleError<T>(operation = 'operation', result?: T) {
     return (error: any): Observable<T> => {
-
       // TODO: send the error to remote logging infrastructure
       console.error(error); // log to console instead
 
@@ -100,8 +96,4 @@ export class MeetingsService {
   //            this.nextMeeting.emit(this.showMeeting);
   //           }
   // }
-
-
-
-
 }
