@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
+import { Routes, RouterModule, ExtraOptions } from '@angular/router';
 import { DashboardComponent } from './layout/dashboard/dashboard.component';
 
 const routes: Routes = [
@@ -9,12 +9,11 @@ const routes: Routes = [
   { path: '**', redirectTo: '/dashboard/1', pathMatch: 'full' },
 ];
 
+const options: ExtraOptions = {
+  initialNavigation: 'enabledBlocking',
+};
 @NgModule({
-  imports: [
-    RouterModule.forRoot(routes, {
-      initialNavigation: 'enabled',
-    }),
-  ],
+  imports: [RouterModule.forRoot(routes, options)],
   exports: [RouterModule],
 })
 export class AppRoutingModule {}

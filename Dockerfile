@@ -1,4 +1,4 @@
-FROM node:14.21-alpine AS build
+FROM node:16.20.2-alpine3.18 AS build
 
 WORKDIR /app
 COPY . .
@@ -8,7 +8,7 @@ RUN yarn config set httpTimeout 600000
 RUN yarn
 RUN yarn run build-prod
 
-FROM alpine:3.17.3 as serve
+FROM alpine:3.18.4 as serve
 COPY --from=build /usr/lib /usr/lib
 COPY --from=build /usr/local/lib /usr/local/lib
 COPY --from=build /usr/local/include /usr/local/include

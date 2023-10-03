@@ -1,4 +1,4 @@
-FROM mcr.microsoft.com/mssql/server:2019-latest
+FROM mcr.microsoft.com/mssql/server:2022-latest
 
 ENV MSSQL_SA_PASSWORD=admiN_123
 ENV ACCEPT_EULA=Y
@@ -13,7 +13,8 @@ COPY fill-database.sql .
 
 EXPOSE 1433
 
-CMD /opt/mssql/bin/sqlservr & sleep 60s \
-  && /opt/mssql-tools/bin/sqlcmd -S localhost -U sa -P ${MSSQL_SA_PASSWORD} -i create-database.sql \
-  && /opt/mssql-tools/bin/sqlcmd -S localhost -U sa -P ${MSSQL_SA_PASSWORD} -i fill-database.sql \
-  && tail -f /dev/null
+# sleep is necessary :(
+CMD /opt/mssql/bin/sqlservr & sleep 35s \
+&& /opt/mssql-tools/bin/sqlcmd -S localhost -U sa -P ${MSSQL_SA_PASSWORD} -i create-database.sql \
+&& /opt/mssql-tools/bin/sqlcmd -S localhost -U sa -P ${MSSQL_SA_PASSWORD} -i fill-database.sql \
+&& tail -f /dev/null
