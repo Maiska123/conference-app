@@ -32,6 +32,20 @@ https://user-images.githubusercontent.com/42906162/199672322-f0c88e39-a0e5-4c64-
       * actually hardcoded to be in ip address space of docker-compose
 * go to http://localhost:8080
 * there room selection with url `/dashboard/:roomId`
+----
+* to add events
+  * POST 
+    * /api/rooms/```{roomId}```/add/event
+* with body
+    ```sh 
+  {
+  "organizer": "<organizer>",
+  "description": "<description>",
+  "startTime": "<2023-10-05 20:15:00>",
+  "endTime": "<2023-10-05 20:30:00>",
+  "subject": "<subject>"
+  } 
+  ```
 
 
 ### backround

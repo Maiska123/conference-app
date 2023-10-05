@@ -14,7 +14,7 @@ COPY fill-database.sql .
 EXPOSE 1433
 
 # sleep is necessary :(
-CMD /opt/mssql/bin/sqlservr & sleep 35s \
+CMD /opt/mssql/bin/sqlservr & sleep 45s \
 && /opt/mssql-tools/bin/sqlcmd -S localhost -U sa -P ${MSSQL_SA_PASSWORD} -i create-database.sql \
 && /opt/mssql-tools/bin/sqlcmd -S localhost -U sa -P ${MSSQL_SA_PASSWORD} -i fill-database.sql \
 && tail -f /dev/null

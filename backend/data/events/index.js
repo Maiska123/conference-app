@@ -67,10 +67,40 @@ const register = async ( { sql, getConnection } ) => {
         return request.query( sqlQueries.getParticipants );
     };
 
+    const addEventToRoom = async (roomId, eventBody) => {
+
+
+      // get a connection to SQL Server
+      const cnx = await getConnection();
+
+      // console.log( cnx, "error connecting to sql server",eventId );
+      // create a new request
+      const request = await cnx.request();
+
+      // {
+      //    "organizer"    : "Mr. Organizer"
+      //   ,"description"  : "We should all come in peace."
+      //   ,"startTime"    : "2023-10-04 20:00:00"
+      //   ,"endTime"      : "2023-10-04 20:30:00"
+      //   ,"subject"      : "Lets Get It On"
+      // }
+
+      // configure sql query parameters
+      request.input( "room",        sql.Int, roomId );
+      request.input( "organizer",   sql.VarChar, eventBody.organizer );
+      request.input( "description", sql.VarChar, eventBody.description );
+      request.input( "startTime",   sql.DateTime, eventBody.startTime );
+      request.input( "endTime",     sql.DateTime, eventBody.endTime );
+      request.input( "subject",     sql.VarChar, eventBody.subject );
+
+      // return the executed query
+      return request.query( sqlQueries.addEventToRoom );
+  };
    return {
        getEvents,
        getRoomInfo,
-       getParticipants
+       getParticipants,
+       addEventToRoom
    };
 };
 
